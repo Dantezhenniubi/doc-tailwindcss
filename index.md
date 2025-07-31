@@ -31,6 +31,8 @@ import TsButton from './TsButton.vue'
 <TsButton />
 :::
 
+<Linkcard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
+
 :::raw
 <div class="overflow-hidden">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
