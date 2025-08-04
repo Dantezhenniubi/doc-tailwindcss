@@ -23,13 +23,6 @@ features:
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
-<script setup>
-import TsButton from './TsButton.vue'
-</script>
-
-:::raw
-<TsButton />
-:::
 
 <Linkcard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
 
