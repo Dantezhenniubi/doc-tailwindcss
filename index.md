@@ -23,6 +23,9 @@ features:
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
+![image](https://cdn.jsdelivr.net/gh/Dantezhenniubi/image-repo@master/4ba7630e0cf3d7ca2d26c9b2b71fbe096963a9ac.jpg)
+
+![](https://raw.githubusercontent.com/Dantezhenniubi/image-repo/master/4ba7630e0cf3d7ca2d26c9b2b71fbe096963a9ac.jpg)
 
 <Linkcard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
 
