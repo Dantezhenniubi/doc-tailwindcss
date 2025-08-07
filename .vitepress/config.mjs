@@ -25,9 +25,25 @@ export default defineConfig({
   themeConfig: {
     outlineTitle: "目录",
     // `'deep'` 与 `[2, 6]` 相同，将显示从 `<h2>` 到 `<h6>` 的所有标题。
-    outline: [2, 6],
+    // outline: [2, 6],
     logo: "/Logo.svg", // 导航栏logo
     siteTitle: "DtZNB's 个人知识库", // 导航栏中间的标题
+    lightModeSwitchTitle: "切换到浅色模式",
+    darkModeSwitchTitle: "切换到深色模式",
+    //上次更新时间
+    lastUpdated: {
+      text: "最后更新于",
+      formatOptions: {
+        dateStyle: "short", // 可选值full、long、medium、short
+        timeStyle: "medium", // 可选值full、long、medium、short
+      },
+    },
+    //自定义上下页名
+    docFooter: {
+      prev: "上一页",
+      next: "下一页",
+    },
+
     // 导航栏最多支持两层嵌套，请注意不要在第二层items使用生成函数
     nav: [
       { text: "Home", link: "/" },
@@ -43,7 +59,7 @@ export default defineConfig({
         text: "更多",
         items: [
           // 使用黑名单过滤assets文件夹和临时文件
-          set_nav_smart("VitePress搭建相关", "/docs/others/vitepress搭建相关", [
+          set_nav_smart("VitePress文档搭建", "/docs/others/vitepress文档搭建", [
             "assets",
           ]),
           set_nav_smart(
@@ -55,16 +71,15 @@ export default defineConfig({
       },
     ],
 
-    // 侧边栏配置，这个函数自动生成侧边栏
+    // 侧边栏配置，这个函数自动生成侧边栏，自动根据路径类型决定是链接还是列表
+    // 路径加index作为结尾，意味着只有该目录下的首页才有侧边栏，如果没有，则该目录下所有页面都会显示侧边栏
     sidebar: {
-      // 使用智能侧边栏配置，自动根据路径类型决定是链接还是列表
-      // 记得要导航到index.md，不然所有的页面都会有侧边栏了
       "/docs/DailyRecord/index": [
         // 使用黑名单过滤临时文件和草稿
         set_sidebar_smart("开发记录", "/docs/DailyRecord/开发记录/"),
         set_sidebar_smart("实习记录", "/docs/DailyRecord/实习记录/"),
       ],
-      "/docs/others/写文章相关/vitepress功能/index": [
+      "/docs/others/写文章相关/vitepress功能/": [
         // 过滤图片文件夹和临时文件
         set_sidebar_smart(
           "拓展语法",
@@ -75,15 +90,27 @@ export default defineConfig({
           "/docs/others/写文章相关/vitepress功能/写文章用/"
         ),
       ],
-      "/docs/others/vitepress搭建相关/index": [
-        set_sidebar_smart("搭建相关", "/docs/others/vitepress搭建相关/", [
+      "/docs/others/写文章相关/Markdown/": [
+        // 过滤图片文件夹和临时文件
+        set_sidebar_smart(
+          "拓展语法",
+          "/docs/others/写文章相关/vitepress功能/拓展语法/"
+        ),
+        set_sidebar_smart(
+          "写文章用",
+          "/docs/others/写文章相关/vitepress功能/写文章用/"
+        ),
+      ],
+      "/docs/others/vitepress文档搭建/": [
+        set_sidebar_smart("搭建相关", "/docs/others/vitepress文档搭建/", [
           "assets",
           "import图片示例.md",
         ]),
       ],
     },
     // sidebar: false, // 关闭侧边栏
-    aside: "left", // 设置右侧文章导航左侧显示
+    // aside: "left", // 设置右侧大纲左侧显示，建议页面单独配置，用于想展示较大内容占比的情况
+    // aside: "false",
 
     socialLinks: [
       // GitHub
