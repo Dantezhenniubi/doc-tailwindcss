@@ -7,6 +7,15 @@ import { set_sidebar_smart } from './utils/auto_sidebar.mjs';
 import { set_nav_smart } from './utils/auto_nav_v2.mjs';
 // 黑名单配置示例
 import { COMMON_BLACKLIST } from './utils/blacklist-example.mjs';
+// 引入文件系统模块
+import fs from "fs/promises"; 
+// 引入路径模块
+import path from "path";  
+// 导入markdown容器相关方法
+import { createIconContainers } from "./utils/markdown-container.js";
+// 导入markdown容器样式生成器
+import { writeContainerStyles } from "./utils/container-style-generator.js";
+
 
 // https://vitepress.vuejs.org/config/app-configs
 export default defineConfig({
@@ -22,10 +31,27 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  markdown: {
+    lineNumbers: true, // 显示代码块行号
+    toc: { level: [1, 2, 3] }, // 目录（TOC）显示 1-3 级标题
+
+    image: {
+      lazyLoading: true,
+    },
+    // 插件
+    config(md) {
+      // 配置带有Iconify图标的容器
+      createIconContainers()(md);
+      const customCssPath = path.resolve(__dirname, "theme/md-container.css");
+      writeContainerStyles(customCssPath, async (filePath, content) => {
+        await fs.writeFile(filePath, content, "utf-8");
+      });
+    },
+  },
   themeConfig: {
     outlineTitle: "目录",
     // `'deep'` 与 `[2, 6]` 相同，将显示从 `<h2>` 到 `<h6>` 的所有标题。
-    // outline: [2, 6],
+    outline: [2, 6],
     logo: "/Logo.svg", // 导航栏logo
     siteTitle: "DtZNB's 个人知识库", // 导航栏中间的标题
     lightModeSwitchTitle: "切换到浅色模式",
@@ -79,28 +105,18 @@ export default defineConfig({
         set_sidebar_smart("开发记录", "/docs/DailyRecord/开发记录/"),
         set_sidebar_smart("实习记录", "/docs/DailyRecord/实习记录/"),
       ],
-      "/docs/others/写文章相关/vitepress功能/": [
+      "/docs/others/写文章相关/Vitepress功能/": [
         // 过滤图片文件夹和临时文件
         set_sidebar_smart(
           "拓展语法",
-          "/docs/others/写文章相关/vitepress功能/拓展语法/"
-        ),
-        set_sidebar_smart(
-          "写文章用",
-          "/docs/others/写文章相关/vitepress功能/写文章用/"
+          "/docs/others/写文章相关/Vitepress功能/拓展语法/"
         ),
       ],
-      "/docs/others/写文章相关/Markdown/": [
+      "/docs/others/写文章相关/Markdown使用/": [
         // 过滤图片文件夹和临时文件
-        set_sidebar_smart(
-          "拓展语法",
-          "/docs/others/写文章相关/vitepress功能/拓展语法/"
-        ),
-        set_sidebar_smart(
-          "写文章用",
-          "/docs/others/写文章相关/vitepress功能/写文章用/"
-        ),
+        set_sidebar_smart("简单使用", "/docs/others/写文章相关/Markdown使用/"),
       ],
+
       "/docs/others/vitepress文档搭建/": [
         set_sidebar_smart("搭建相关", "/docs/others/vitepress文档搭建/", [
           "assets",

@@ -1,0 +1,96 @@
+
+/* 自定义容器图标样式 */
+:root .container-icon {
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 自定义容器样式 */
+:root .custom-block {
+  margin: 1rem 0;
+  border-left-width: 0.25rem;
+  border-left-style: solid;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:root .custom-block-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* 信息容器 */
+:root .custom-block.info {
+  background-color: #e6f7ff !important;
+  border-color: #1890ff !important;
+}
+
+:root .custom-block.info .custom-block-title {
+  color: #0050b3 !important;
+}
+
+/* 提示容器 */
+:root .custom-block.tip {
+  background-color: #f6ffed !important;
+  border-color: #52c41a !important;
+}
+
+:root .custom-block.tip .custom-block-title {
+  color: #237804 !important;
+}
+
+/* 警告容器 */
+:root .custom-block.warning {
+  background-color: #fffbe6 !important;
+  border-color: #faad14 !important;
+}
+
+:root .custom-block.warning .custom-block-title {
+  color: #ad6800 !important;
+}
+
+/* 危险容器 */
+:root .custom-block.danger {
+  background-color: #fff2f0 !important;
+  border-color: #ff4d4f !important;
+}
+
+:root .custom-block.danger .custom-block-title {
+  color: #a8071a !important;
+}
+
+/* 笔记容器 */
+:root .custom-block.note {
+  background-color: #f9f0ff !important;
+  border-color: #722ed1 !important;
+}
+
+:root .custom-block.note .custom-block-title {
+  color: #531dab !important;
+}
+
+/* 成功容器 */
+:root .custom-block.success {
+  background-color: #f0fff0 !important;
+  border-color: #52c41a !important;
+}
+
+:root .custom-block.success .custom-block-title {
+  color: #135200 !important;
+}
+
+/* 代码容器 */
+:root .custom-block.CTcode {
+  background-color: #f5f5f5 !important;
+  border-color: #8c8c8c !important;
+}
+
+:root .custom-block.CTcode .custom-block-title {
+  color: #262626 !important;
+}
