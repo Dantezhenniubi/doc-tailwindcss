@@ -7,6 +7,7 @@ layout: page
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useMarkdownFiles } from '../../../.vitepress/utils/pageUtils.js'
+import { withBase } from 'vitepress'
 
 // 初始化文章列表
 const articles = ref([])
@@ -15,6 +16,9 @@ const articles = ref([])
 onMounted(() => {
   // 使用工具类获取文件列表
   useMarkdownFiles(articles, '前端工程化')
+  console.log(articles.value)
+
+
 })
 </script>
 
@@ -30,7 +34,7 @@ onMounted(() => {
   
   <div class="tips-list">
     <div v-for="article in articles" :key="article.name" class="tip-item">
-      <a :href="article.route" class="tip-link">
+      <a :href="withBase(article.route)" class="tip-link">
         <div class="tip-content">
           <h3>{{ article.name }}</h3>
         </div>
@@ -39,7 +43,7 @@ onMounted(() => {
   </div>
 </div>
 
-<style>
+<style scope>
 .tips-container {
   max-width: 1200px;
   margin: 0 auto;

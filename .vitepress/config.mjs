@@ -31,6 +31,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  // vue: {
+  //   template: {
+  //     compilerOptions: {
+  //       isCustomElement: (tag) => tag === 'iconify-icon'
+  //     }
+  //   }
+  // },
   markdown: {
     lineNumbers: true, // 显示代码块行号
     toc: { level: [1, 2, 3] }, // 目录（TOC）显示 1-3 级标题

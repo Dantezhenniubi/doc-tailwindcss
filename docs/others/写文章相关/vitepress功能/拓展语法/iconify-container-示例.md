@@ -11,10 +11,6 @@ description: 展示如何在VitePress中将Iconify图标与markdown-it-container
 
 使用自定义容器语法 `::: 容器名称 标题内容`，可以创建带有图标的容器：
 
-::: custom 信息提示
-这是一个带有信息图标的容器
-:::
-
 ::: info 信息提示
 这是一个带有信息图标的容器
 :::
