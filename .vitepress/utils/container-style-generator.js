@@ -13,6 +13,14 @@ export function generateContainerStyles() {
   
   // 基础样式
   styles += `
+
+/* 避免布局偏移 */
+iconify-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
 /* 自定义容器图标样式 */
 :root .container-icon {
   margin-right: 0.5rem;
