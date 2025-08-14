@@ -40,7 +40,7 @@ export function createIconContainer(options) {
           const iconName = options.icon ? `${iconPrefix}${options.icon}` : "";
 
           const iconHtml = iconName
-            ? `<span class="container-icon"><Icon icon="${iconName}"></Icon></span>`
+            ? `<span class="container-icon"><iconify-icon icon="${iconName}"></iconify-icon></span>`
             : "";
 
           return `<div class="custom-block ${name}">

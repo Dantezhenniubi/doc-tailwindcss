@@ -31,13 +31,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  // vue: {
-  //   template: {
-  //     compilerOptions: {
-  //       isCustomElement: (tag) => tag === 'iconify-icon'
-  //     }
-  //   }
-  // },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => tag === 'iconify-icon'
+      }
+    }
+  },
   markdown: {
     lineNumbers: true, // 显示代码块行号
     toc: { level: [1, 2, 3] }, // 目录（TOC）显示 1-3 级标题
@@ -115,8 +115,7 @@ export default defineConfig({
       "/docs/others/写文章相关/Vitepress功能/": [
         // 过滤图片文件夹和临时文件
         set_sidebar_smart(
-          "拓展语法",
-          "/docs/others/写文章相关/Vitepress功能/拓展语法/"
+          "拓展语法", "/docs/others/写文章相关/Vitepress功能/拓展语法/"
         ),
       ],
       "/docs/others/写文章相关/Markdown使用/": [

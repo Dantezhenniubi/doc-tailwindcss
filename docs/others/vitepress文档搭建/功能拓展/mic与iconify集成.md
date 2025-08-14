@@ -26,4 +26,11 @@ pnpm add -D markdown-it-container
 <<< @/.vitepress/utils/markdown-container.js
 
 ### 安装`iconify`图标库
-由于vitepress需要支持SSR，我们安装的应该是`iconify-icon`Web库，拥有更好的SSR兼容
+我们知道，`VitePress`是一个[静态站点生成器](https://en.wikipedia.org/wiki/Static_site_generator) (SSG)<br>
+通过使用 Vue 的服务器端渲染 (SSR) 功能，VitePress 能够在生产构建期间在 Node.js 中预渲染应用程序。这意味着**主题组件中的所有自定义代码都需要考虑 SSR 兼容性**。
+这里有两种方案，一种对SSR友好，一种虽然也支持但需指定参数(呃至少我没感觉区别)
+
+#### 安装`iconify-icon`库
+
+
+
