@@ -1,31 +1,29 @@
 # 引入Tailwind CSS V4
 
-## 安装
+vitepress和Tailwind CSS V4本身其实是有点小冲突的，因为V4用的是原生CSS层，大概是样式优先级的问题。
+具体可以看这个[issue](https://github.com/vuejs/vitepress/issues/4425)
+如果你想省事，可以安装这位佬的快速启动模板[Vitepress-Tailwindcss](https://github.com/dealenx/vitepress-tailwind)
 
-由于V4版本的Tailwindcss安装方式发生了重大变动，对于Vitepress项目（基于 Vite），强烈推荐使用 Tailwind 的 Vite 插件而不是 PostCSS 插件
-这里使用pnpm安装V4版本的Tailwindcss作为vite插件
-::: code-group
+## 安装依赖
+具体要安装的依赖有@tailwindcss/postcss、@tailwindcss/vite、tailwindcss
+因为不仅要作为vite插件，也要进行样式分层
+::: CTcode
+```sh
+pnpm add -D @tailwindcss/postcss @tailwindcss/vite tailwindcss
 
-```bash[⭐pnpm]
-pnpm add -D tailwindcss @tailwindcss/vite
 ```
-
 :::
 
-安装好后，由于本项目使用的是V4版本的Tailwindcss，我一开始安装也是一头雾水，使用老版本初始化配置命令一直报错找不到，经过一番查询，原来V4这个版本在配置上进行了革新
+安装好后，由于本项目使用的是V4版本的Tailwindcss，我一开始安装也是一头雾水，使用老版本初始化配置命令一直报错找不到，经过一番查询，原来V4这个版本在配置上进行了革新<br>
+具体版本升级内容推荐去看官方文档[Tailwindcss官方升级说明](https://tailwindcss.com/docs/upgrade-guide#removed-tailwind-directives)
 
-详细推荐去看官方文档[Tailwindcss官方升级说明](https://tailwindcss.com/docs/upgrade-guide#removed-tailwind-directives)
-或者AI总结的一些重点：
-[关于tailwindcssV4](../关于tailwindcssV4.md)
 
-> - `Tailwind CSS v4`采用零配置内容检测：在大多数情况下，你不再需要像`v3`那样在`tailwind.config.js`文件中手动配置`content`路径来告诉`Tailwind`要扫描哪些文件。**`Tailwind v4`会自动寻找你的模板文件**。此外，如果你需要在 CSS 中明确指定扫描的根路径（例如在 monorepo 项目中），可以使用`source()`函数，如`@import "tailwindcss" source("../src");`。
->   **传统的js配置也是支持的**，详情查看官方文档：[JS配置说明](https://tailwindcss.com/docs/upgrade-guide#using-a-javascript-config-file)
 
-> - Tailwind CSS v4.0 并非设计用于与 Sass、Less 或 Stylus 等 CSS 预处理器配合使用。请将 Tailwind CSS 本身视为您的预处理器，**您不应将 Tailwind 与 Sass 配合使用**，原因与您不应将 Sass 与 Stylus 配合使用相同。因此，您无法在 Vue、Svelte、Astro 等语言中将 Sass、Less 或 Stylus 用于样式表或代码块。
+
 
 ## 配置
 
-在项目的主题文件夹下新增一个CSS用作入口文件，比如在`.vitepress/theme/css`文件夹下创建一个`custom.css`
+在项目的主题文件夹下新增一个CSS用作入口文件，比如在`.vitepress/theme/css`文件夹下创建一个`tailwind.css`
 
 ### 引入核心文件和自定义文件
 
@@ -44,27 +42,12 @@ pnpm add -D tailwindcss @tailwindcss/vite
 
 ### vitepress显式配置
 
-写好入口CSS后，由于项目使用的是vitepress搭建，需要在vitepress的配置文件中显式引入该CSS文件，否则项目启动后不会自动加载
+写好入口CSS后，由于项目使用的是vitepress搭建，需要在vitepress的配置文件的`vite`选项中说明，否则项目启动后不会自动加载
 
 ```js
 vite: {
-    plugins: [
-      tailwindcss({
-        // 指定 Tailwind 入口文件
-        entryPoint: path.resolve(__dirname, "./theme/css/custom.css"),
-        // 避免重复注入基础样式
-        injectBase: false,
-        // 生产环境优化
-        minify: process.env.NODE_ENV === "production",
-        // 开发环境配置
-        ...(process.env.NODE_ENV === "development" && {
-          // 开发时禁用压缩以提高构建速度
-          minify: false,
-          // 启用源码映射以便调试
-          sourceMap: true
-        })
-      }),
-    ],
+    plugins: [tailwindcss()],
+  },
 ```
 
 ### @theme 自定义主题变量

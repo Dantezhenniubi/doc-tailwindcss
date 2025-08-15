@@ -1,0 +1,32 @@
+/* 自定义字体 */
+
+/* 昆明海鸥体 */
+@font-face {
+  font-family: 'KMHai';
+  src:
+    local('KMHai'),
+    url('./fonts/KMHai.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Orbitron科幻几何无衬线 */
+@font-face {
+  font-family: 'Orbitron';
+  src:
+    local('Orbitron'),
+    url('./fonts/Orbitron Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* 设置全局字体变量 */
+:root {
+  /* 基本文本字体 */
+  --vp-font-family-base: 'Orbitron', KMHai;
+  /* 代码字体 */
+  --vp-font-family-mono: 'Orbitron', KMHai;
+}
