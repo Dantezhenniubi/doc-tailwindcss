@@ -17,8 +17,12 @@ export const containerConfigs = {
     iconPrefix: 'tabler:',
     colors: {
       bg: '#e6f7ff',
+      bgDark: '#111d2c',
       border: '#1890ff',
+      borderDark: '#177ddc',
       title: '#0050b3',
+      titleDark: '#40a9ff',
+      textDark: '#a6d8ff',
     },
   },
 
@@ -29,8 +33,12 @@ export const containerConfigs = {
     iconPrefix: 'tabler:',
     colors: {
       bg: '#f6ffed',
+      bgDark: '#162312',
       border: '#52c41a',
+      borderDark: '#49aa19',
       title: '#237804',
+      titleDark: '#73d13d',
+      textDark: '#b7eb8f',
     },
   },
 
@@ -41,8 +49,12 @@ export const containerConfigs = {
     iconPrefix: 'tabler:',
     colors: {
       bg: '#fffbe6',
+      bgDark: '#2b2111',
       border: '#faad14',
+      borderDark: '#d89614',
       title: '#ad6800',
+      titleDark: '#ffc53d',
+      textDark: '#ffe58f',
     },
   },
 
@@ -53,8 +65,12 @@ export const containerConfigs = {
     iconPrefix: 'tabler:',
     colors: {
       bg: '#fff2f0',
+      bgDark: '#2a1215',
       border: '#ff4d4f',
+      borderDark: '#d32029',
       title: '#a8071a',
+      titleDark: '#ff7875',
+      textDark: '#ffccc7',
     },
   },
 
@@ -65,32 +81,44 @@ export const containerConfigs = {
     iconPrefix: 'tabler:',
     colors: {
       bg: '#f9f0ff',
+      bgDark: '#1f1a29',
       border: '#722ed1',
+      borderDark: '#642ab5',
       title: '#531dab',
+      titleDark: '#9254de',
+      textDark: '#efdbff',
     },
   },
 
-  // 新增：成功容器
+  // 成功容器
   success: {
     defaultTitle: '成功',
     icon: 'circle-check',
     iconPrefix: 'tabler:',
     colors: {
       bg: '#f0fff0',
+      bgDark: '#162312',
       border: '#52c41a',
+      borderDark: '#49aa19',
       title: '#135200',
+      titleDark: '#73d13d',
+      textDark: '#b7eb8f',
     },
   },
 
-  // 新增：代码容器
+  // 代码容器
   CTcode: {
     defaultTitle: '代码',
     icon: 'code',
     iconPrefix: 'tabler:',
     colors: {
       bg: '#f5f5f5',
+      bgDark: '#1f1f1f',
       border: '#8c8c8c',
+      borderDark: '#6b6b6b',
       title: '#262626',
+      titleDark: '#d9d9d9',
+      textDark: '#f0f0f0',
     },
   },
 };

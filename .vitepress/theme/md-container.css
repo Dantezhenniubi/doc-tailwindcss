@@ -43,6 +43,20 @@ iconify-icon {
   color: #0050b3 !important;
 }
 
+/* 黑暗模式下的信息容器 */
+.dark .custom-block.info {
+  background-color: #111d2c !important;
+  border-color: #177ddc !important;
+}
+
+.dark .custom-block.info .custom-block-title {
+  color: #40a9ff !important;
+}
+
+.dark .custom-block.info {
+  color: #a6d8ff !important;
+}
+
 /* 提示容器 */
 :root .custom-block.tip {
   background-color: #f6ffed !important;
@@ -51,6 +65,20 @@ iconify-icon {
 
 :root .custom-block.tip .custom-block-title {
   color: #237804 !important;
+}
+
+/* 黑暗模式下的提示容器 */
+.dark .custom-block.tip {
+  background-color: #162312 !important;
+  border-color: #49aa19 !important;
+}
+
+.dark .custom-block.tip .custom-block-title {
+  color: #73d13d !important;
+}
+
+.dark .custom-block.tip {
+  color: #b7eb8f !important;
 }
 
 /* 警告容器 */
@@ -63,6 +91,20 @@ iconify-icon {
   color: #ad6800 !important;
 }
 
+/* 黑暗模式下的警告容器 */
+.dark .custom-block.warning {
+  background-color: #2b2111 !important;
+  border-color: #d89614 !important;
+}
+
+.dark .custom-block.warning .custom-block-title {
+  color: #ffc53d !important;
+}
+
+.dark .custom-block.warning {
+  color: #ffe58f !important;
+}
+
 /* 危险容器 */
 :root .custom-block.danger {
   background-color: #fff2f0 !important;
@@ -71,6 +113,20 @@ iconify-icon {
 
 :root .custom-block.danger .custom-block-title {
   color: #a8071a !important;
+}
+
+/* 黑暗模式下的危险容器 */
+.dark .custom-block.danger {
+  background-color: #2a1215 !important;
+  border-color: #d32029 !important;
+}
+
+.dark .custom-block.danger .custom-block-title {
+  color: #ff7875 !important;
+}
+
+.dark .custom-block.danger {
+  color: #ffccc7 !important;
 }
 
 /* 笔记容器 */
@@ -83,6 +139,20 @@ iconify-icon {
   color: #531dab !important;
 }
 
+/* 黑暗模式下的笔记容器 */
+.dark .custom-block.note {
+  background-color: #1f1a29 !important;
+  border-color: #642ab5 !important;
+}
+
+.dark .custom-block.note .custom-block-title {
+  color: #9254de !important;
+}
+
+.dark .custom-block.note {
+  color: #efdbff !important;
+}
+
 /* 成功容器 */
 :root .custom-block.success {
   background-color: #f0fff0 !important;
@@ -93,6 +163,20 @@ iconify-icon {
   color: #135200 !important;
 }
 
+/* 黑暗模式下的成功容器 */
+.dark .custom-block.success {
+  background-color: #162312 !important;
+  border-color: #49aa19 !important;
+}
+
+.dark .custom-block.success .custom-block-title {
+  color: #73d13d !important;
+}
+
+.dark .custom-block.success {
+  color: #b7eb8f !important;
+}
+
 /* 代码容器 */
 :root .custom-block.CTcode {
   background-color: #f5f5f5 !important;
@@ -101,4 +185,18 @@ iconify-icon {
 
 :root .custom-block.CTcode .custom-block-title {
   color: #262626 !important;
+}
+
+/* 黑暗模式下的代码容器 */
+.dark .custom-block.CTcode {
+  background-color: #1f1f1f !important;
+  border-color: #6b6b6b !important;
+}
+
+.dark .custom-block.CTcode .custom-block-title {
+  color: #d9d9d9 !important;
+}
+
+.dark .custom-block.CTcode {
+  color: #f0f0f0 !important;
 }

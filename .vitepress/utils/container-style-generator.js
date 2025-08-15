@@ -10,7 +10,7 @@ import { getContainerConfigs } from './container-config.js';
 export function generateContainerStyles() {
   const configs = getContainerConfigs();
   let styles = '';
-  
+
   // 基础样式
   styles += `
 
@@ -47,7 +47,7 @@ iconify-icon {
   align-items: center;
 }
 `;
-  
+
   // 为每个容器生成特定样式
   for (const [name, config] of Object.entries(configs)) {
     if (config.colors) {
@@ -61,10 +61,24 @@ iconify-icon {
 :root .custom-block.${name} .custom-block-title {
   color: ${config.colors.title} !important;
 }
+
+/* 黑暗模式下的${config.defaultTitle || name}容器 */
+.dark .custom-block.${name} {
+  background-color: ${config.colors.bgDark} !important;
+  border-color: ${config.colors.borderDark} !important;
+}
+
+.dark .custom-block.${name} .custom-block-title {
+  color: ${config.colors.titleDark} !important;
+}
+
+.dark .custom-block.${name} {
+  color: ${config.colors.textDark} !important;
+}
 `;
     }
   }
-  
+
   return styles;
 }
 
