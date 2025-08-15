@@ -34,9 +34,9 @@ export default defineConfig({
   vue: {
     template: {
       compilerOptions: {
-        isCustomElement: (tag) => tag === 'iconify-icon'
-      }
-    }
+        isCustomElement: (tag) => tag === "iconify-icon",
+      },
+    },
   },
   markdown: {
     lineNumbers: true, // 显示代码块行号
@@ -109,13 +109,15 @@ export default defineConfig({
     sidebar: {
       "/docs/DailyRecord/index": [
         // 使用黑名单过滤临时文件和草稿
+        set_sidebar_smart("踩坑记录", "/docs/DailyRecord/踩坑记录/"),
         set_sidebar_smart("开发记录", "/docs/DailyRecord/开发记录/"),
         set_sidebar_smart("实习记录", "/docs/DailyRecord/实习记录/"),
       ],
-      "/docs/others/写文章相关/Vitepress功能/": [
+      "/docs/others/写文章相关/vitepress功能/": [
         // 过滤图片文件夹和临时文件
         set_sidebar_smart(
-          "拓展语法", "/docs/others/写文章相关/Vitepress功能/拓展语法/"
+          "拓展语法",
+          "/docs/others/写文章相关/vitepress功能/拓展语法/"
         ),
       ],
       "/docs/others/写文章相关/Markdown使用/": [

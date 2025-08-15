@@ -69,6 +69,32 @@ export default defineConfig({
 ```sh
 pnpm add -D @iconify/vue
 ```
+你需要在`.vitepress/theme/index.js`文件中引入`@iconify/vue`库
+```js
+import { Icon } from '@iconify/vue'
+```
+然后在`components`选项中注册`Icon`组件
+```js{5}
+export default {
+  extends: DefaultTheme,
+  enhanceApp({ app }) {
+    // 注册Iconify组件
+    app.component('Icon', Icon);
+  },
+};
+```
+
+::: tip
+如果你使用的是`@iconify/vue`库，需要将本文`markdown-container.js`工具类里所有`iconify-icon`的tag替换为`Icon`
+就像是这样
+```css
+// 改动前
+<span class="container-icon"><iconify-icon icon="${iconName}"></iconify-icon></span>
+// 改动后
+<span class="container-icon"><Icon icon="${iconName}"></Icon></span>
+```
+:::
+
 
 ## 编写工具类
 按本项目的做法，是编写了三个工具类：
