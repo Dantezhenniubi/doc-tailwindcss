@@ -18,10 +18,10 @@ export const containerConfigs = {
     colors: {
       bg: '#e6f7ff',
       border: '#1890ff',
-      title: '#0050b3'
-    }
+      title: '#0050b3',
+    },
   },
-  
+
   // 提示容器
   tip: {
     defaultTitle: '提示',
@@ -30,10 +30,10 @@ export const containerConfigs = {
     colors: {
       bg: '#f6ffed',
       border: '#52c41a',
-      title: '#237804'
-    }
+      title: '#237804',
+    },
   },
-  
+
   // 警告容器
   warning: {
     defaultTitle: '警告',
@@ -42,10 +42,10 @@ export const containerConfigs = {
     colors: {
       bg: '#fffbe6',
       border: '#faad14',
-      title: '#ad6800'
-    }
+      title: '#ad6800',
+    },
   },
-  
+
   // 危险容器
   danger: {
     defaultTitle: '危险',
@@ -54,10 +54,10 @@ export const containerConfigs = {
     colors: {
       bg: '#fff2f0',
       border: '#ff4d4f',
-      title: '#a8071a'
-    }
+      title: '#a8071a',
+    },
   },
-  
+
   // 笔记容器
   note: {
     defaultTitle: '笔记',
@@ -66,33 +66,33 @@ export const containerConfigs = {
     colors: {
       bg: '#f9f0ff',
       border: '#722ed1',
-      title: '#531dab'
-    }
+      title: '#531dab',
+    },
   },
-  
+
   // 新增：成功容器
   success: {
-    defaultTitle: "成功",
-    icon: "circle-check",
-    iconPrefix: "tabler:",
+    defaultTitle: '成功',
+    icon: 'circle-check',
+    iconPrefix: 'tabler:',
     colors: {
       bg: '#f0fff0',
       border: '#52c41a',
-      title: '#135200'
-    }
+      title: '#135200',
+    },
   },
-  
+
   // 新增：代码容器
   CTcode: {
-    defaultTitle: "代码",
-    icon: "code",
-    iconPrefix: "tabler:",
+    defaultTitle: '代码',
+    icon: 'code',
+    iconPrefix: 'tabler:',
     colors: {
       bg: '#f5f5f5',
       border: '#8c8c8c',
-      title: '#262626'
-    }
-  }
+      title: '#262626',
+    },
+  },
 };
 
 /**

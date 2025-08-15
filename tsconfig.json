@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./.vitepress/theme/*"]
+    },
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
+  },
+  "include": [
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.d.ts",
+    ".vitepress/**/*.tsx",
+    ".vitepress/**/*.vue",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/.vitepress/dist/**"
+  ]
+}

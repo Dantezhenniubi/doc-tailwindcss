@@ -2,28 +2,23 @@
  * 页面工具类 - 用于处理页面相关的通用功能
  */
 
-
 /**
  * 提取有效的路由路径
  * @param {string} path - 原始文件路径
  * @returns {string} - 格式化后的路由路径
  */
 function extractRoutePath(path) {
-  
-  console.log("路径处理前path", path);
   // 匹配 /docs/ 之后的部分，并移除 .md 扩展名
 
   const match = path.match(/(\/docs\/.*?)(?=\.md$)/);
-  console.log("1路径处理后path", match);
   if (match && match[1]) {
     return match[1];
   }
-  
 
   // 备选方案：移除不必要的路径前缀
   return path
-    .replace(/^.*?\/docs\//, '/') // 移除 /docs/ 之前的所有部分
-    .replace(/(\.md|\.html)$/, ''); // 移除扩展名
+    .replace(/^.*?\/docs\//, "/") // 移除 /docs/ 之前的所有部分
+    .replace(/(\.md|\.html)$/, ""); // 移除扩展名
 }
 
 /**
@@ -33,12 +28,10 @@ function extractRoutePath(path) {
  */
 function formatDisplayName(name) {
   return name
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, c => c.toUpperCase())
-    .replace(/\.md$/, '');
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/\.md$/, "");
 }
-
-
 
 /**
  * 获取指定目录下的Markdown文件列表
@@ -56,12 +49,9 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
     customFilter: null,
     customMap: null,
   };
-  console.log("G MapName", MapName);
-  console.log("G options", options);
 
   // 合并选项
   const mergedOptions = { ...defaultOptions, ...options };
-  console.log("mergedOptions", mergedOptions);
 
   // 定义硬编码的路径映射
   const mdFilesMap = {
@@ -75,10 +65,8 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
   };
 
   // 获取指定目录的文件
-  console.log("获取前的MapName", MapName);
 
   const mdFiles = mdFilesMap[MapName] || {};
-  console.log("mdFiles", mdFiles);
 
   // 处理文件列表
   const fileList = Object.keys(mdFiles)
@@ -106,7 +94,7 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
         // 添加显示名称（中文友好的名称）
         displayName: formatDisplayName(name),
       };
-    })
+    });
 
   return fileList;
 }
@@ -117,12 +105,8 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
  * @param {string} MapName - 映射路径的别名，默认为当前目录 '.'
  * @param {Object} options - 配置选项，同getMarkdownFiles的options
  */
-export function useMarkdownFiles(articlesRef, MapName = '.', options = {}) {
+export function useMarkdownFiles(articlesRef, MapName = ".", options = {}) {
   // 获取文件列表
-  console.log("刚传递的MapName", MapName);
-  console.log("刚传递的articlesRef", articlesRef);  
-
-  console.log("刚传递的options",  options);
 
   const fileList = getMarkdownFiles(MapName, options);
 
