@@ -73,7 +73,7 @@ export default defineConfig({
     config(md) {
       // 配置带有Iconify图标的容器
       createIconContainers()(md);
-      const customCssPath = path.resolve(__dirname, 'theme/md-container.css');
+      const customCssPath = path.resolve(__dirname, 'theme/css/md-container.css');
       writeContainerStyles(customCssPath, async (filePath, content) => {
         await fs.writeFile(filePath, content, 'utf-8');
       });

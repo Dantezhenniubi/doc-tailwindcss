@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "./tw-title.css";
+@import "./tw-table.css";
+
+@plugin "@iconify/tailwind4" {
+    prefix: "iconify";
+    scale: 1.2;
+  }

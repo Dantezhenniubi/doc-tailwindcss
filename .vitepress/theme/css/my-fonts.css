@@ -1,0 +1,120 @@
+/* 自定义字体 */
+
+/* 昆明海鸥体 */
+@font-face {
+  font-family: 'KMHai';
+  src:
+    local('KMHai'),
+    url('../fonts/KMHai.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Orbitron科幻几何无衬线 */
+@font-face {
+  font-family: 'Orbitron';
+  src:
+    local('Orbitron'),
+    url('../fonts/Orbitron Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 爱点风雅黑长体 */
+@font-face {
+  font-family: 'AiDian';
+  src:
+    local('AiDian'),
+    url('../fonts/爱点风雅黑长体.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 叶根友锐劲体 */
+@font-face {
+  font-family: 'YeGY';
+  src:
+    local('YeGY'),
+    url('../fonts/叶根友锐劲体.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 平方追风体 */
+@font-face {
+  font-family: 'PingFangZF';
+  src:
+    local('PingFangZF'),
+    url('../fonts/PingFangZhuiFengTi-2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 平方长安体 */
+@font-face {
+  font-family: 'PingFangCA';
+  src:
+    local('PingFangCA'),
+    url('../fonts/PingFangChangAnTi-2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ComicMono */
+@font-face {
+  font-family: 'ComicMono';
+  src:
+    local('ComicMono'),
+    url('../fonts/ComicMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ComicMono-Bold */
+@font-face {
+  font-family: 'ComicMono-Bold';
+  src:
+    local('ComicMono-Bold'),
+    url('../fonts/ComicMono-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ComicShannsMono-Regular */
+@font-face {
+  font-family: 'ComicShannsMono-Regular';
+  src:
+    local('ComicShannsMono-Regular'),
+    url('../fonts/ComicShannsMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 随峰体Plus */
+@font-face {
+  font-family: 'SFPlus';
+  src:
+    local('SFPlus'),
+    url('../fonts/ThePeakFontPlus_V1_001.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* 设置全局字体变量 */
+:root {
+  /* 基本文本字体 */
+  --vp-font-family-base: 'ComicMono-Bold';
+  /* 代码字体 */
+  --vp-font-family-mono: 'ComicMono-Bold';
+}
