@@ -109,6 +109,7 @@ export default defineConfig({
       //   text: "后端相关",
       //   items: set_nav_v2("/Back-end"),
       // },
+      set_nav_smart('开发工具', '/docs/开发工具/'),
       set_nav_smart('个人记录', '/docs/DailyRecord/'),
       set_nav_smart('前端相关', '/docs/Front-end'),
       set_nav_smart('后端相关', '/docs/Back-end'),
@@ -126,17 +127,14 @@ export default defineConfig({
     // 路径加index作为结尾，意味着只有该目录下的首页才有侧边栏，如果没有，则该目录下所有页面都会显示侧边栏
     sidebar: {
       '/docs/DailyRecord/index': [
-        // 使用黑名单过滤临时文件和草稿
         set_sidebar_smart('踩坑记录', '/docs/DailyRecord/踩坑记录/'),
         set_sidebar_smart('开发记录', '/docs/DailyRecord/开发记录/'),
         set_sidebar_smart('实习记录', '/docs/DailyRecord/实习记录/'),
       ],
       '/docs/others/写文章相关/vitepress功能/': [
-        // 过滤图片文件夹和临时文件
         set_sidebar_smart('拓展语法', '/docs/others/写文章相关/vitepress功能/拓展语法/'),
       ],
       '/docs/others/写文章相关/Markdown使用/': [
-        // 过滤图片文件夹和临时文件
         set_sidebar_smart('简单使用', '/docs/others/写文章相关/Markdown使用/'),
       ],
 
@@ -146,6 +144,7 @@ export default defineConfig({
           'import图片示例.md',
         ]),
       ],
+      '/docs/开发工具/': [set_sidebar_smart('开发工具', '/docs/开发工具/')],
     },
     // sidebar: false, // 关闭侧边栏
     // aside: "left", // 设置右侧大纲左侧显示，建议页面单独配置，用于想展示较大内容占比的情况
