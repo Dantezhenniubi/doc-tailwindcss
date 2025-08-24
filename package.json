@@ -4,7 +4,8 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
