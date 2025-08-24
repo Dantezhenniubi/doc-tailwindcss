@@ -2,7 +2,29 @@
 
 .vp-doc {
   table {
-    @apply border-separate border border-gray-400 table-auto 
-      bg-blue-500 transition delay-10 duration-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500;
+    @apply border-separate border border-gray-400 table-auto
+      bg-blue-500 transition delay-10 duration-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-green-500;
   }
+  /* 表头 */
+  table th {
+    @apply bg-green-50 align-middle whitespace-pre drop-shadow-lg;
+  }
+  /* 表格行 */
+  table tr {
+    @apply whitespace-pre;
+  }
+  
 }
+
+/* 黑暗模式支持 */
+.dark .vp-doc {
+    table {
+      @apply border-separate border border-gray-400 table-auto
+        bg-blue-500 transition delay-10 duration-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500;
+    }
+    /* 表头 */
+    table th {
+      @apply bg-indigo-600;
+    }
+    
+  }

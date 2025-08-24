@@ -16,7 +16,6 @@
       @apply text-emerald-600 transition duration-100 hover:skew-x-2 scale-105 origin-top-left;
     }
   }
-  
 
   /* 三级标题 */
   h3 {
@@ -28,12 +27,18 @@
 
   /* 四级标题 */
   h4 {
-    @apply text-xl font-medium text-gray-600 mt-6 mb-3 italic;
+    @apply text-xl font-medium text-gray-600 mt-6 mb-3 italic underline decoration-dashed underline-offset-4;
+    &::before {
+      @apply content-['📚'] mr-2;
+    }
   }
 
   /* 五级标题 */
   h5 {
-    @apply text-lg font-medium text-gray-500 mt-4 mb-2 underline decoration-dashed;
+    @apply text-lg font-medium text-gray-500 mt-4 mb-2 underline decoration-dashed underline-offset-4;
+    &::before {
+      @apply content-['🤨'] mr-2;
+    }
   }
 
   /* 六级标题 */

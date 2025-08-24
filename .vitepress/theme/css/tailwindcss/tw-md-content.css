@@ -1,0 +1,117 @@
+/* 自定义侧边栏在最左边，右边撑满宽度 */
+.VPDoc .container {
+  margin: 0 !important;
+  /* 移除容器外边距 */
+}
+
+@media (min-width: 960px) {
+  .VPDoc:not(.has-sidebar) .content {
+    max-width: 100% !important;
+    /* 没有侧边栏时的内容最大宽度 */
+  }
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: 1024px !important;
+  /* 有侧边栏时的内容容器最大宽度 */
+}
+
+@media (min-width: 960px) {
+  .VPDoc:not(.has-sidebar) .container {
+    display: flex !important;
+    justify-content: center !important;
+    /* max-width: 2880px !important; */
+    max-width: none !important; /* 移除最大宽度限制 */
+    /* 没有侧边栏时的容器最大宽度 */
+  }
+}
+
+.VPDoc.has-aside .aside {
+  margin-right: 0 !important;
+}
+
+/* 侧边栏标题 */
+.aside-content .outline-title {
+  margin: 10px 0 0px;
+  font-size: 1.5rem;
+  font-weight: 1500;
+  color: var(--vp-c-text-2);
+  position: relative;
+}
+/* 侧边栏列表 */
+.aside-content .content {
+  margin-left: 0px;
+}
+
+/* 侧边栏标题后缀 */
+.aside-content .outline-title::after {
+  content: '～(∠・ω<)⌒✨';
+  font-size: 0.9rem;
+  font-weight: 1500;
+  color: var(--vp-c-text-2);
+  margin-left: 10px;
+  position: absolute;
+}
+/* 侧边栏内容块 */
+.aside-content {
+  @apply align-text-bottom;
+  font-size: 3.9rem;
+  color: var(--vp-c-text-2);
+  padding: 0px 0px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  margin-bottom: auto;
+}
+/* 激活的侧边栏项样式 */
+.aside-content .active {
+  color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+  padding: 8px 22px;
+  font-weight: bolder;
+  /* box-shadow: aqua 0px 6px 10px; */
+}
+/* 侧边栏hover效果 */
+.aside-content:hover {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  transform: translateX(4px);
+}
+
+/* 侧边栏link文字 */
+.aside-content .outline-link {
+    @apply text-clip;
+  font-style: normal !important;
+  font-size: 0.9rem;
+  padding-left: 20px;
+}
+/* 侧边栏link块 */
+.aside-content a {
+  color: inherit;
+  display: block;
+  position: relative;
+  padding: 0px 0px; /* 增加上下内边距 */
+  margin: 4px 0; /* 增加外边距 */
+  font-size: 1rem !important; /* 调大字体 */
+}
+/* 侧边栏link前缀常态 */
+.aside-content a::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--vp-c-brand-1) !important;
+}
+
+
+/* 侧边栏link选中后 */
+.aside-content a:hover {
+    @apply animate-bounce;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* 标记 */
+.aside-content .outline-marker {
+  padding-left: 10px;
+  padding-bottom: 30px;
+  padding-top: 22px;
+}
+

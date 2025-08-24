@@ -1,0 +1,6 @@
+/* 使用TailwindCSS自定义markdown-it-container的容器 */
+
+:root .custom-block {
+    @apply transition delay-10 duration-100 ease-in-out hover:-translate-y-1 hover:scale-105;
+
+}

@@ -1,6 +1,11 @@
 @import "tailwindcss";
+
+@import "./tw-marker.css";
+@import "./tw-md-content.css";
 @import "./tw-title.css";
 @import "./tw-table.css";
+@import "./tw-md-container.css";
+
 
 @plugin "@iconify/tailwind4" {
     prefix: "iconify";
