@@ -81,3 +81,42 @@ npx simple-git-hooks
 
 :::
 这样每次 `npm install` 或 `pnpm install` 后会自动配置钩子
+
+`"commit-msg": "node scripts/git-hooks/commit-msg.mjs"`
+的意思是：调用这个路径的脚本文件，所以我们需要手动创建`commit-msg.mjs`
+
+测试正则表达式的[网站](https://regex101.com/)
+
+这里给一份示例：
+::: CTcode
+
+```js
+// scripts/git-hooks/commit-msg.mjs
+import fs from 'node:fs';
+import path from 'node:path';
+
+const msgPath = path.resolve(process.cwd(), '.git/COMMIT_EDITMSG');
+const msg = fs.readFileSync(msgPath, 'utf-8').trim();
+const commitRE =
+  /^Merge.+|(?:feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|types)(?:\(.+\))?: .{1,50}/;
+
+if (!commitRE.test(msg)) {
+  // 友好的错误提示
+  console.error(
+    '  Error: proper commit message format is required for automated changelog generation.'
+  );
+  console.error("  - Use 'npm run commit' to interactively generate a commit message.");
+  console.error('  - See .github/COMMIT_CONVENTION.md for more details.');
+  console.error('');
+
+  // 添加 SourceTree 友好提示
+  console.error('  SourceTree 用户请注意：');
+  console.error('  1. 请修改上方的提交信息文本框');
+  console.error('  2. 按规范格式重新输入，比如feat: 提交改动 或者 feat(theme): 提交改动');
+  console.error('  3. 再次点击"提交"按钮');
+
+  process.exit(1);
+}
+```
+
+:::
