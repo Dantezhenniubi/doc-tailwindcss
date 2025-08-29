@@ -84,7 +84,7 @@ export default defineConfig({
         // UI 库解析器 (按需)
         resolvers: [
           ElementPlusResolver({
-            importStyle: 'css', // 避免 VitePress 的 SSR 样式问题
+            importStyle: 'css',
           }),
         ],
         // 类型声明配置,开启需要TS支持
@@ -105,6 +105,10 @@ export default defineConfig({
         directives: true,
       }),
     ],
+    ssr: {
+      // 解决 Element Plus CSS 在 SSR 中的问题
+      noExternal: ['element-plus'],
+    },
   },
   vue: {
     template: {
