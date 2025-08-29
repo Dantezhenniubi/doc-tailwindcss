@@ -26,11 +26,9 @@
     ".vitepress/**/*.vue",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.vue"
+    "**/*.vue",
+    ".vitepress/theme/data/posts.data.js",
+    ".vitepress/theme/data/posts.data.js"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/.vitepress/dist/**"
-  ]
+  "exclude": ["node_modules", "dist", "**/.vitepress/dist/**"]
 }

@@ -14,6 +14,7 @@ dist-ssr
 .vitepress/cache
 docs/.vitepress/cache
 ./.eslintcache
+.eslintcache
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

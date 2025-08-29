@@ -18,6 +18,8 @@ git hook 是一个命令或脚本，每次执行 git 操作时都会运行，例
 如果 git hook 执行失败，则 git 操作将中止。
 :::
 
+## 配置钩子
+
 我们知道，git默认的钩子都在项目下的`.git/hooks`文件夹下，里面可以看到有很多sample后缀的示例文件，我们想要启用对应的钩子，就得去掉这些文件的后缀
 当然，我们不必手动操作，只需运行刚刚安装的hooks管理工具即可
 
@@ -120,3 +122,13 @@ if (!commitRE.test(msg)) {
 ```
 
 :::
+
+## 题外话
+
+感觉可以配置一下[cz-git](https://github.com/Zhengqbbb/cz-git)
+命令行git提交用的，不过我都用sourcetree了感觉好像用不上？
+DX 第一个更加工程化、轻量级、可定制、标准输出格式的Commitizen 适配器和Git 提交 CLI。
+
+> 什么是 commitizen：一个基于 Node.js 的git commit命令行工具，用于辅助生成标准化的提交消息。
+
+> 什么是适配器：替换commitizen 命令行工具的交互式插件。

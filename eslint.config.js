@@ -95,6 +95,7 @@ export default [
       'vue/no-v-html': 'warn', // 将 v-html 用法降级为警告而非错误
       'vue/component-api-style': ['error', ['script-setup']], // 强制使用 script setup 语法
       'vue/block-order': ['error', { order: ['template', 'script', 'style'] }], // 强制组件的块顺序
+      'vue/no-multiple-template-root': 'off', // 允许template根元素没有子元素
     },
   },
 

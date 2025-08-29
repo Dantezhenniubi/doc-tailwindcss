@@ -5,21 +5,20 @@ vitepress和Tailwind CSS V4本身其实是有点小冲突的，因为V4用的是
 如果你想省事，可以安装这位佬的快速启动模板[Vitepress-Tailwindcss](https://github.com/dealenx/vitepress-tailwind)
 
 ## 安装依赖
+
 具体要安装的依赖有@tailwindcss/postcss、@tailwindcss/vite、tailwindcss
 因为不仅要作为vite插件，也要进行样式分层
 ::: CTcode
+
 ```sh
 pnpm add -D @tailwindcss/postcss @tailwindcss/vite tailwindcss
 
 ```
+
 :::
 
 安装好后，由于本项目使用的是V4版本的Tailwindcss，我一开始安装也是一头雾水，使用老版本初始化配置命令一直报错找不到，经过一番查询，原来V4这个版本在配置上进行了革新<br>
 具体版本升级内容推荐去看官方文档[Tailwindcss官方升级说明](https://tailwindcss.com/docs/upgrade-guide#removed-tailwind-directives)
-
-
-
-
 
 ## 配置
 
@@ -103,18 +102,22 @@ vite: {
 ```
 
 #### 全局字体
+
 由于 Vitepress [自身的一些原因](https://vitepress.dev/guide/extending-default-theme#using-different-fonts)：
+
 > VitePress 使用Inter作为默认字体，并将在构建输出中包含该字体。该字体也会在生产环境中自动预加载。
 
 我们需要在vitepress项目中导入`Vitepress无字体默认主题`，并导入字体的CSS文件：
-```js
-import DefaultTheme from 'vitepress/theme-without-fonts'
-import './my-fonts.css'
 
-export default DefaultTheme
+```js
+import DefaultTheme from 'vitepress/theme-without-fonts';
+import './my-fonts.css';
+
+export default DefaultTheme;
 ```
 
 然后在字体文件中这样去引入覆盖:
+
 ```js
 /* Orbitron科幻几何无衬线 */
 @font-face {
@@ -164,4 +167,16 @@ Tailwind v4 官方文档明确表示：
 增加 ~30% 的 CSS 体积
 降低 PurgeCSS 的优化效率
 
-- **使用**
+### 黑暗模式支持
+
+[官方文档说明](https://tailwindcss.com/docs/dark-mode)
+
+你必须要在tailwind的入口文件使用@custom-variant定义暗黑模式才能覆盖vitepress的暗黑模式
+::: CTcode
+
+```
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+:::

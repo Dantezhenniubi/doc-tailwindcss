@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
-  text: "A VitePress Site"
+  name: 'My Awesome Project'
+  text: 'A VitePress Site'
   tagline: My great project tagline
   actions:
     - theme: brand
@@ -27,9 +27,12 @@ features:
 
 ![](https://raw.githubusercontent.com/Dantezhenniubi/image-repo/master/4ba7630e0cf3d7ca2d26c9b2b71fbe096963a9ac.jpg)
 
-<Linkcard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
+<LinkCard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
+
+<MyComponent />
 
 :::raw
+
 <div class="overflow-hidden">
     <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">

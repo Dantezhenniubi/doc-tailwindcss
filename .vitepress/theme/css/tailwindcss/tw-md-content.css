@@ -79,7 +79,7 @@
 
 /* 侧边栏link文字 */
 .aside-content .outline-link {
-    @apply text-clip;
+  @apply text-clip;
   font-style: normal !important;
   font-size: 0.9rem;
   padding-left: 20px;
@@ -101,10 +101,9 @@
   color: var(--vp-c-brand-1) !important;
 }
 
-
 /* 侧边栏link选中后 */
 .aside-content a:hover {
-    @apply animate-bounce;
+  @apply animate-bounce;
   color: var(--vp-c-brand-1) !important;
 }
 
@@ -114,4 +113,3 @@
   padding-bottom: 30px;
   padding-top: 22px;
 }
-

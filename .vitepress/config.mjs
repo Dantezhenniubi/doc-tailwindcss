@@ -1,6 +1,9 @@
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
 
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'; // 按需引入 UI 库
+
 // 自动生成侧边栏
 import { set_sidebar_smart } from './utils/auto_sidebar.mjs';
 // 自动生成导航栏（新版本，支持VitePress两层嵌套限制）
@@ -47,8 +50,62 @@ export default defineConfig({
     }
     return [];
   },
+  // 添加文章数据加载器
+  dataLoader: {
+    '/posts.json': () => import('./theme/data/posts.data.js').then((m) => m.default.load()),
+  },
   vite: {
-    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        preserveEntrySignatures: 'strict',
+      },
+    },
+    plugins: [
+      tailwindcss(),
+      // `按需导入`插件配置
+      Components({
+        // VitePress 专用目录配置
+        dirs: [
+          '.vitepress/theme/components', // 主题组件
+          'components', // 项目级组件 (docs/components)
+        ],
+
+        // 包含 Markdown 文件中的组件
+        extensions: ['vue', 'md'],
+
+        // 启用深层目录搜索
+        deep: true,
+
+        // UI 库解析器 (按需)
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: 'css', // 避免 VitePress 的 SSR 样式问题
+          }),
+        ],
+
+        // 类型声明配置,开启需要TS支持
+        dts: false,
+
+        // 目录名作为命名空间 (避免冲突)
+        directoryAsNamespace: true,
+
+        // 排除不需要自动导入的组件
+        exclude: [
+          /[\\/]node_modules[\\/]/,
+          /[\\/]\.git[\\/]/,
+          // /[\\/]\.vitepress[\\/]theme[\\/]/, // 排除主题内置组件，暂时用不到
+        ],
+
+        // 排除异步组件
+        excludeNames: [/^Async[A-Z].*/],
+
+        // Vue 版本检测 (VitePress 使用 Vue 3)
+        version: 3,
+
+        // 指令自动导入 (Vue 3 默认开启)
+        directives: true,
+      }),
+    ],
   },
   vue: {
     template: {
@@ -104,6 +161,8 @@ export default defineConfig({
     // 导航栏最多支持两层嵌套，请注意不要在第二层items使用生成函数
     nav: [
       { text: 'Home', link: '/' },
+      { text: '博客', link: '/blog' },
+      { text: '主页', link: '/homepage' },
       // 原本的结构：
       // {
       //   text: "后端相关",
