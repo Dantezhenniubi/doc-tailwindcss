@@ -58,7 +58,7 @@
     "*.{css,scss}": [
       "prettier --write"
     ],
-    "*.{json,md,html}": [
+    "*.{json,html}": [
       "prettier --write"
     ],
     "*.vue": [
