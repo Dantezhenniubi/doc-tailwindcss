@@ -3,7 +3,6 @@ import { h } from 'vue';
 import DefaultTheme from 'vitepress/theme-without-fonts';
 // 自定义样式, 保证位于默认主题之后导入
 import './custom.css';
-import 'element-plus/dist/index.css';
 
 // 导入动画组件
 import { Motion } from 'motion-v';

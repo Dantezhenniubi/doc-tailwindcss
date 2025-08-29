@@ -1,8 +1,10 @@
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
 
+// 两个按需引入的插件
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'; // 按需引入 UI 库
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 // 自动生成侧边栏
 import { set_sidebar_smart } from './utils/auto_sidebar.mjs';
@@ -57,11 +59,17 @@ export default defineConfig({
   vite: {
     build: {
       rollupOptions: {
-        preserveEntrySignatures: 'strict',
+        preserveEntrySignatures: 'strict', // 确保组件的导出是严格模式
       },
     },
     plugins: [
       tailwindcss(),
+      // 自动导入函数和API
+      AutoImport({
+        imports: ['vue', '@vueuse/core'], // 自动导入 Vue 相关函数
+        resolvers: [ElementPlusResolver()], // 自动导入 Element Plus 组件
+        // dts: '.vitepress/auto-imports.d.ts',  // 生成自动导入的声明文件，默认生成auto-imports.d.ts
+      }),
       // `按需导入`插件配置
       Components({
         // VitePress 专用目录配置
@@ -69,39 +77,30 @@ export default defineConfig({
           '.vitepress/theme/components', // 主题组件
           'components', // 项目级组件 (docs/components)
         ],
-
         // 包含 Markdown 文件中的组件
         extensions: ['vue', 'md'],
-
         // 启用深层目录搜索
         deep: true,
-
         // UI 库解析器 (按需)
         resolvers: [
           ElementPlusResolver({
             importStyle: 'css', // 避免 VitePress 的 SSR 样式问题
           }),
         ],
-
         // 类型声明配置,开启需要TS支持
         dts: false,
-
         // 目录名作为命名空间 (避免冲突)
         directoryAsNamespace: true,
-
         // 排除不需要自动导入的组件
         exclude: [
           /[\\/]node_modules[\\/]/,
           /[\\/]\.git[\\/]/,
           // /[\\/]\.vitepress[\\/]theme[\\/]/, // 排除主题内置组件，暂时用不到
         ],
-
         // 排除异步组件
         excludeNames: [/^Async[A-Z].*/],
-
         // Vue 版本检测 (VitePress 使用 Vue 3)
         version: 3,
-
         // 指令自动导入 (Vue 3 默认开启)
         directives: true,
       }),
