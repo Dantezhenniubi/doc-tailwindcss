@@ -1,8 +1,8 @@
-<!-- 这是一个使用@vueuse/motion库实现的文章瀑布流动画组件 -->
+<!-- 使用@vueuse/motion实现的文章瀑布流动画组件（SSR兼容版） -->
 <script setup>
 import { useMotion } from '@vueuse/motion';
 import { onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
-import { useRoute } from 'vitepress';
+import { useRoute, inBrowser } from 'vitepress'; // 添加 inBrowser 检测
 
 const route = useRoute();
 const motionInstances = ref([]);
@@ -12,36 +12,44 @@ const animationReady = ref(false);
 
 // 检测是否偏好减少运动
 const checkReducedMotion = () => {
-  if (typeof window !== 'undefined') {
+  if (inBrowser) {
     isReducedMotion.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 };
 
-// 清除动画实例和状态
+// SSR 安全的 DOM 操作函数
+const safeQuerySelectorAll = (selector) => {
+  if (!inBrowser) return [];
+  return document.querySelectorAll(selector);
+};
+
+// 清除动画实例和状态 (SSR 安全)
 const clearAnimations = () => {
   // 清除所有动画实例
   motionInstances.value.forEach((instance) => instance.stop());
   motionInstances.value = [];
 
   // 停止观察所有元素
-  if (observer.value) {
+  if (observer.value && inBrowser) {
     observer.value.disconnect();
     observer.value = null;
   }
 
   // 重置所有元素的动画状态
-  document.querySelectorAll('[data-motion-applied]').forEach((el) => {
-    el.removeAttribute('data-motion-applied');
-    el.removeAttribute('data-motion-index');
-    el.style.opacity = '';
-    el.style.transform = '';
-    el.style.willChange = '';
-  });
+  if (inBrowser) {
+    safeQuerySelectorAll('[data-motion-applied]').forEach((el) => {
+      el.removeAttribute('data-motion-applied');
+      el.removeAttribute('data-motion-index');
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.willChange = '';
+    });
+  }
 };
 
-// 创建滚动观察器
+// 创建滚动观察器 (SSR 安全)
 const createObserver = () => {
-  if (typeof window === 'undefined') return;
+  if (!inBrowser) return;
 
   // 创建 Intersection Observer 实例
   observer.value = new IntersectionObserver(
@@ -51,10 +59,10 @@ const createObserver = () => {
           const el = entry.target;
           const index = parseInt(el.dataset.motionIndex);
 
-          // 计算延迟 - 大幅减少延迟时间
-          let delay = Math.min(index * 10, 200); // 最大延迟200ms
+          // 计算延迟
+          let delay = Math.min(index * 10, 200);
           if (el.tagName.toLowerCase().startsWith('h')) {
-            delay = Math.min(index * 5, 100); // 标题最大延迟100ms
+            delay = Math.min(index * 5, 100);
           }
 
           // 创建动画实例
@@ -70,7 +78,7 @@ const createObserver = () => {
               rotateX: 0,
               transition: {
                 delay,
-                duration: 500, // 缩短动画时间
+                duration: 500,
                 easing: 'ease-out',
                 type: 'spring',
                 stiffness: 120,
@@ -80,39 +88,43 @@ const createObserver = () => {
           });
 
           motionInstances.value.push(instance);
-
-          // 动画开始后停止观察
           observer.value.unobserve(el);
         }
       });
     },
     {
-      rootMargin: '0px 0px -100px 0px', // 扩大触发区域
-      threshold: 0.01, // 更低阈值确保触发
+      rootMargin: '0px 0px -100px 0px',
+      threshold: 0.01,
     }
   );
 };
 
-// 准备动画元素
+// 准备动画元素 (SSR 安全)
 const prepareTextAnimations = async () => {
   // 清除之前的动画状态
   clearAnimations();
 
   // 检查减少运动偏好
   checkReducedMotion();
-  if (isReducedMotion.value) {
+
+  // 如果没有浏览器环境或用户偏好减少运动
+  if (!inBrowser || isReducedMotion.value) {
     // 减少运动时直接显示所有内容
-    document
-      .querySelectorAll('.vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote)')
-      .forEach((el) => {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      });
+    if (inBrowser) {
+      safeQuerySelectorAll('.vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote)').forEach(
+        (el) => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      );
+    }
     return;
   }
 
   // 等待 DOM 更新
   await nextTick();
+
+  if (!inBrowser) return;
 
   const docContainer = document.querySelector('.vp-doc');
   if (!docContainer) return;
@@ -147,44 +159,38 @@ const prepareTextAnimations = async () => {
     textElements.forEach((el) => {
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight * 0.9) {
-        // 手动添加到观察器队列
         if (observer.value) {
-          observer.value.unobserve(el); // 先移除
-          observer.value.observe(el); // 再添加以触发回调
+          observer.value.unobserve(el);
+          observer.value.observe(el);
         }
       }
     });
   }, 50);
-
-  // 标记动画已准备就绪
-  animationReady.value = true;
 };
 
 // 监听路由变化
 watch(
   () => route.path,
   (newPath, oldPath) => {
-    // 重置动画就绪状态
-    animationReady.value = false;
-
     // 只有当路径确实改变时才重新准备动画
-    if (newPath !== oldPath) {
-      setTimeout(prepareTextAnimations, 50); // 缩短等待时间
+    if (newPath !== oldPath && inBrowser) {
+      setTimeout(prepareTextAnimations, 50);
     }
   },
   { immediate: true }
 );
 
 onMounted(() => {
+  // 只在浏览器中执行
+  if (!inBrowser) return;
+
   // 初始准备动画
   prepareTextAnimations();
 
   // 监听减少运动偏好的变化
-  if (typeof window !== 'undefined') {
-    window
-      .matchMedia('(prefers-reduced-motion: reduce)')
-      .addEventListener('change', checkReducedMotion);
-  }
+  window
+    .matchMedia('(prefers-reduced-motion: reduce)')
+    .addEventListener('change', checkReducedMotion);
 });
 
 onUnmounted(() => {
@@ -192,7 +198,7 @@ onUnmounted(() => {
   clearAnimations();
 
   // 移除事件监听
-  if (typeof window !== 'undefined') {
+  if (inBrowser) {
     window
       .matchMedia('(prefers-reduced-motion: reduce)')
       .removeEventListener('change', checkReducedMotion);
@@ -201,30 +207,15 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* 初始状态 - 使用CSS变量控制 */
+/* 初始状态 */
 .vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote) {
   opacity: 0;
   transform: translateY(20px) rotateX(3deg);
   will-change: opacity, transform;
-  transition: none !important; /* 防止默认过渡干扰 */
+  transition: none !important;
 }
 
-/* 当动画准备就绪时显示元素 */
-body.vp-animation-ready .vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote) {
-  opacity: 1;
-  transform: none;
-}
-
-/* 减少运动时直接显示内容 */
-@media (prefers-reduced-motion: reduce) {
-  .vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote) {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-/* 排除代码块 - 修复CSS语法错误 */
+/* 排除代码块 */
 .vp-doc pre,
 .vp-doc code,
 .vp-doc .language- {
@@ -239,10 +230,13 @@ body.vp-animation-ready .vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote) {
   .vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote) {
     transform: translateY(15px) rotateX(2deg) !important;
   }
+}
 
-  /* 移动设备上减少延迟效果 */
-  [data-motion-index] {
-    --animation-delay-multiplier: 0.5 !important;
+@media (prefers-reduced-motion: reduce) {
+  .vp-doc :is(h1, h2, h3, h4, h5, h6, p, li, blockquote) {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 </style>

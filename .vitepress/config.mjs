@@ -61,6 +61,8 @@ export default defineConfig({
       rollupOptions: {
         preserveEntrySignatures: 'strict', // 确保组件的导出是严格模式
       },
+      // 解决大文件警告
+      chunkSizeWarningLimit: 1000,
     },
     plugins: [
       tailwindcss(),
