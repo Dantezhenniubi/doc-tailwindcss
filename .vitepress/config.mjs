@@ -209,6 +209,9 @@ export default defineConfig({
         ]),
       ],
       '/docs/开发工具/': [set_sidebar_smart('开发工具', '/docs/开发工具/')],
+      '/docs/Front-end/TailwindCSS/': [
+        set_sidebar_smart('TailwindCSS', '/docs/Front-end/TailwindCSS/'),
+      ],
     },
     // sidebar: false, // 关闭侧边栏
     // aside: "left", // 设置右侧大纲左侧显示，建议页面单独配置，用于想展示较大内容占比的情况

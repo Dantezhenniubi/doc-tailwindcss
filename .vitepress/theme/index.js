@@ -8,6 +8,11 @@ import './custom.css';
 import { Motion } from 'motion-v';
 import { MotionPlugin } from '@vueuse/motion';
 import DocTextAnimation from './components/DocTextAnimation.vue';
+import ShinyText from './components/animate/ShinyText.vue';
+import CurvedLoop from './components/animate/CurvedLoop.vue';
+import FuzzyText from './components/animate/FuzzyText.vue';
+import SquaresMove from './components/animate/SquaresMove.vue';
+import PixelCard from './components/animate/PixelCard.vue';
 
 // 导入自定义组件
 import LinkCard from './components/LinkCard.vue';
@@ -36,6 +41,11 @@ export default {
     app.component('BlogLayout', BlogLayout);
     app.component('MyCustomLayout', MyCustomLayout);
     app.component('EnhancedArticlesList', EnhancedArticlesList);
+    app.component('ShinyText', ShinyText);
+    app.component('CurvedLoop', CurvedLoop);
+    app.component('FuzzyText', FuzzyText);
+    app.component('SquaresMove', SquaresMove);
+    app.component('PixelCard', PixelCard);
     app.use(MotionPlugin);
     // 注册Iconify组件
     // app.component('Icon', Icon);

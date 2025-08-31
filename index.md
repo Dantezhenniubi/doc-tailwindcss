@@ -1,26 +1,7 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
-layout: home
+layout: page
 
-hero:
-  name: 'My Awesome Project'
-  text: 'A VitePress Site'
-  tagline: My great project tagline
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
-
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
 ![image](https://cdn.jsdelivr.net/gh/Dantezhenniubi/image-repo@master/4ba7630e0cf3d7ca2d26c9b2b71fbe096963a9ac.jpg)
@@ -29,7 +10,8 @@ features:
 
 <LinkCard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
 
-<MyComponent />
+
+
 
 :::raw
 
@@ -48,4 +30,43 @@ features:
         </div>
     </div>
 </div>
+
+<ShinyText class="text-3xl"
+    text="Just some shiny text!" 
+    :disabled="false" 
+    :speed="3" 
+    class-name="your-custom-class"
+    twLinearConfig="bg-linear-[25deg,red_5%,yellow_60%,lime_90%,teal] dark:bg-linear-[25deg,red_5%,white_60%,blue_90%,teal]"
+/>
+
+<CurvedLoop
+    marquee-text="Be ✦ Creative ✦ With ✦ Vue ✦ Bits ✦"
+    :speed="2"
+    :curve-amount="3400"
+    direction="left"
+    :interactive="true"
+    textColor="fill-blue-500"
+/>
+<CurvedLoop
+    marquee-text="Be ✦ Creative ✦ With ✦ Vue ✦ Bits ✦"
+    :speed="2"
+    :curve-amount="10"
+    direction="left"
+    :interactive="true"
+    textColor="fill-blue-500"
+/>
+
+<FuzzyText class="shadow-amber-300"
+    text="404错误"
+    :font-size="140"
+    font-weight="900"
+    font-family="PingFangZF"
+    color="#fff"
+    :enable-hover="true"
+    :base-intensity="0.18"
+    :hover-intensity="0.5"
+/>
+
+
+
 :::
