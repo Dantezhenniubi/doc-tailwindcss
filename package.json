@@ -32,6 +32,7 @@
     "vue-eslint-parser": "^10.2.0"
   },
   "dependencies": {
+    "@css-render/vue3-ssr": "^0.15.14",
     "@element-plus/icons-vue": "^2.3.2",
     "@nanostores/vue": "^1.0.1",
     "@vueuse/components": "^13.7.0",
@@ -41,6 +42,7 @@
     "gray-matter": "^4.0.3",
     "iconify-icon": "^3.0.0",
     "motion-v": "^1.7.0",
+    "naive-ui": "^2.42.0",
     "nanostores": "^1.0.1",
     "reading-time-estimator": "^1.14.0",
     "tinyglobby": "^0.2.14",

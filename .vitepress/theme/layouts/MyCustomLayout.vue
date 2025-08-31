@@ -6,18 +6,7 @@
     </header>
 
     <main class="custom-content flex box-content items-center justify-center">
-      <Content />
-      <PixelCard
-        class="z-0 items-center relative"
-        variant="default"
-        :gap="5"
-        :speed="35"
-        colors="#f8fafc,#f1f5f9,gray"
-        :no-focus="false"
-        class-name=""
-      >
-        <p class="z-50 absolute p-5 flex items-center justify-center">aaahhhh</p>
-      </PixelCard>
+      <n-button type="primary"> Primary </n-button>
     </main>
 
     <footer class="custom-footer">

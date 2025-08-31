@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 // 自动生成侧边栏
 import { set_sidebar_smart } from './utils/auto_sidebar.mjs';
@@ -20,6 +21,8 @@ import path from 'path';
 import { createIconContainers } from './utils/markdown-container.js';
 // 导入markdown容器样式生成器
 import { writeContainerStyles } from './utils/container-style-generator.js';
+
+const fileAndStyles = {};
 
 // https://vitepress.vuejs.org/config/app-configs
 export default defineConfig({
@@ -56,7 +59,11 @@ export default defineConfig({
   dataLoader: {
     '/posts.json': () => import('./theme/data/posts.data.js').then((m) => m.default.load()),
   },
+  // naive-ui 配置
+
+  // vite 配置
   vite: {
+    // vite 构建配置
     build: {
       rollupOptions: {
         preserveEntrySignatures: 'strict', // 确保组件的导出是严格模式
@@ -64,6 +71,7 @@ export default defineConfig({
       // 解决大文件警告
       chunkSizeWarningLimit: 1000,
     },
+    // vite 插件配置
     plugins: [
       tailwindcss(),
       // 自动导入函数和API
@@ -88,6 +96,7 @@ export default defineConfig({
           ElementPlusResolver({
             importStyle: 'css',
           }),
+          NaiveUiResolver(),
         ],
         // 类型声明配置,开启需要TS支持
         dts: false,
@@ -107,11 +116,36 @@ export default defineConfig({
         directives: true,
       }),
     ],
+    // vite SSR配置
     ssr: {
-      // 解决 Element Plus CSS 在 SSR 中的问题
-      noExternal: ['element-plus'],
+      // 解决 Element Plus、Naive-ui CSS 在 SSR 中的问题
+      noExternal: ['element-plus', 'naive-ui', 'date-fns', 'vueuc'],
     },
   },
+  // naive-ui额外配置
+  postRender(context) {
+    const styleRegex = /<css-render-style>((.|\s)+)<\/css-render-style>/;
+    const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/;
+    const style = styleRegex.exec(context.content)?.[1];
+    const vitepressPath = vitepressPathRegex.exec(context.content)?.[1];
+
+    if (vitepressPath && style) {
+      fileAndStyles[vitepressPath] = style;
+    }
+
+    context.content = context.content.replace(styleRegex, '');
+    context.content = context.content.replace(vitepressPathRegex, '');
+  },
+  transformHtml(code, id) {
+    const html = id.split('/').pop();
+    if (!html) return;
+
+    const style = fileAndStyles[`/${html}`];
+    if (style) {
+      return code.replace(/<\/head>/, `${style}</head>`);
+    }
+  },
+  // vue 配置
   vue: {
     template: {
       compilerOptions: {
