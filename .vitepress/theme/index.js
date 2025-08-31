@@ -1,5 +1,8 @@
-// import "./tailwind.css";
-import { h } from 'vue';
+/* eslint-disable vue/one-component-per-file */
+import { setup } from '@css-render/vue3-ssr';
+import { NConfigProvider } from 'naive-ui';
+import { useRoute } from 'vitepress';
+import { defineComponent, h, inject } from 'vue';
 import DefaultTheme from 'vitepress/theme-without-fonts';
 // 自定义样式, 保证位于默认主题之后导入
 import './custom.css';
@@ -24,10 +27,60 @@ import BlogLayout from './layouts/BlogLayout.vue';
 import MyCustomLayout from './layouts/MyCustomLayout.vue';
 import EnhancedArticlesList from './components/EnhancedArticlesList.vue';
 
+// naive-ui 配置
+const { Layout } = DefaultTheme;
+
+const CssRenderStyle = defineComponent({
+  setup() {
+    const collect = inject('css-render-collect');
+    return {
+      style: collect(),
+    };
+  },
+  render() {
+    return h('css-render-style', {
+      innerHTML: this.style,
+    });
+  },
+});
+
+const VitepressPath = defineComponent({
+  setup() {
+    const route = useRoute();
+    return () => {
+      return h('vitepress-path', null, [route.path]);
+    };
+  },
+});
+
+const NaiveUIProvider = defineComponent({
+  render() {
+    return h(
+      NConfigProvider,
+      { abstract: true, inlineThemeDisabled: true },
+      {
+        default: () => [
+          h(Layout, null, { default: this.$slots.default?.() }),
+          import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
+        ],
+      }
+    );
+  },
+});
+
 export default {
   extends: DefaultTheme,
   // ...DefaultTheme, //或者这样写也可
-  // 插槽
+
+  // naive-ui 配置
+  Layout: NaiveUIProvider,
+  enhanceApp: ({ app }) => {
+    if (import.meta.env.SSR) {
+      const { collect } = setup(app);
+      app.provide('css-render-collect', collect);
+    }
+  },
+  // vitepress插槽
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
