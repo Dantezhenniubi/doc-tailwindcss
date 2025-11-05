@@ -46,7 +46,7 @@ jobs:
       - name: Clean pnpm cache
         run: pnpm store prune
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile # CI严格复现本地依赖树
       - name: Build with VitePress
         run: pnpm run docs:build 
         # 启动项目
