@@ -54,8 +54,10 @@ const { isDark } = useData() // 此时 isDark 是一个 ref 对象
 
 在模板中直接使用 isDark 时，Vue 会自动解包 ref：
 ::: CTcode
-<button @click="nextBg(isDark)"> 
-<!-- 相当于传递 isDark.value (布尔值) 而不是 ref 对象 -->
+```vue
+<button @click="nextBg(isDark)" /> 
+// 相当于传递 isDark.value (布尔值) 而不是 ref 对象
+```
 :::
 这样传进去，函数在处理时就相当于`isDark.value.value`，从一个值中读取属性值，这显然就会导致undefined。
 
