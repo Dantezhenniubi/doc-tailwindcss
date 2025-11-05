@@ -101,7 +101,8 @@ import '@/styles/element-pagination.css'; // 你的覆盖层
 
 若仍想写在单文件，用 `:global()` 包裹**整段**：
 
-```vue<style scoped>
+```vue
+<style scoped>
 :global(.el-pagination .el-pager li.active) {
   background-color: #4059AD;
   color: #fff;
