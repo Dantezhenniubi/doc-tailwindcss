@@ -1,0 +1,50 @@
+/* 自定义主题变量 */
+
+@theme {
+  /* ---------通用部分--------- */
+  --bg-color-lightMode: #f5f5f5;
+  --bg-color-darkMode: #1a1a1a;
+  --text-color-light: #54996d;
+  --text-color-dark: #e0e0e0;
+  /* 亮模式字色 */
+  --color-text-primary: #1f2937; /* gray-800 */
+  --color-text-secondary: #6b7280; /* gray-500 */
+  --color-text-display: #3b82f6; /* blue-500 */
+
+  /* 暗模式字色 */
+  --color-text-dark-primary: #f9fafb; /* gray-50 */
+  --color-text-dark-secondary: #9ca3af; /* gray-400 */
+  --color-text-dark-display: #60a5fa; /* blue-400 */
+
+  /* 亮色背景 */
+  --bg-light1: url('/LightBG/light-bg1.png');
+  --bg-light2: url('/LightBG/light-bg2.png');
+  --bg-light3: url('/LightBG/light-bg3.png');
+  --bg-light4: url('/LightBG/light-bg4.png');
+
+  /* 暗色背景 */
+  --bg-dark1: url('/DarkBG/dark-bg1.png');
+  --bg-dark2: url('/DarkBG/dark-bg2.png');
+
+  /* ---------ELementPlus 部分--------- */
+}
+
+@utility bg-light1 {
+  background-image: var(--bg-light1);
+}
+@utility bg-light2 {
+  background-image: var(--bg-light2);
+}
+@utility bg-light3 {
+  background-image: var(--bg-light3);
+}
+@utility bg-light4 {
+  background-image: var(--bg-light4);
+}
+
+@utility bg-dark1 {
+  background-image: var(--bg-dark1);
+}
+@utility bg-dark2 {
+  background-image: var(--bg-dark2);
+}

@@ -1,0 +1,5 @@
+---
+layout: MyCustomLayout
+footer: false
+---
+

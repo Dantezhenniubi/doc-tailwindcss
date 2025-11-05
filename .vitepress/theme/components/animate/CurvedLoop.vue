@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="min-h-screen flex items-center justify-center w-full"
+    class="flex items-center justify-center w-full bg-white/0"
     :style="{
       visibility: ready ? 'visible' : 'hidden',
       cursor: cursorStyle,

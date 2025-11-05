@@ -1,7 +1,7 @@
+/* 试作品，荧光笔动画 */
 @layer components {
   .marker-text-highlight {
-    @apply relative inline-block rounded-[5px] text-[var(--vp-c-text-soft)] px-[0.2em] py-[0.1em] overflow-hidden z-0;
-    line-height: 1.8;
+    @apply relative overflow-hidden z-0;
   }
 
   .marker-text-highlight::before {

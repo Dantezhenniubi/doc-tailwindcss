@@ -1,5 +1,5 @@
 // container-style-generator.js
-// 用于根据容器配置生成CSS样式，与markdown-container.js配合
+// 用于根据markdown-it-container容器配置生成CSS样式，与markdown-container.js配合
 
 import { getContainerConfigs } from './container-config.js';
 

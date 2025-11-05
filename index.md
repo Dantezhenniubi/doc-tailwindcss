@@ -6,11 +6,11 @@ layout: page
 
 ![image](https://cdn.jsdelivr.net/gh/Dantezhenniubi/image-repo@master/4ba7630e0cf3d7ca2d26c9b2b71fbe096963a9ac.jpg)
 
-![](https://raw.githubusercontent.com/Dantezhenniubi/image-repo/master/4ba7630e0cf3d7ca2d26c9b2b71fbe096963a9ac.jpg)
-
 <LinkCard url="https://vitepress.yiov.top/" title="Vitepress中文搭建教程" description="https://vitepress.yiov.top/" logo="https://vitepress.yiov.top/logo.png"/>
 
-
+<div class="bg-[url(/bg-canvas.png)]! bg-fixed">
+    <p>ssssss</p>
+</div>
 
 
 :::raw
@@ -61,7 +61,7 @@ layout: page
     :font-size="140"
     font-weight="900"
     font-family="PingFangZF"
-    color="#fff"
+    color="blue"
     :enable-hover="true"
     :base-intensity="0.18"
     :hover-intensity="0.5"
@@ -70,3 +70,5 @@ layout: page
 
 
 :::
+<testcomponents />
+<RadialMotion />

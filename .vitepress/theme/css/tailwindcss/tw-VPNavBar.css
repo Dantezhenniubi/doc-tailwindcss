@@ -39,3 +39,35 @@
     backdrop-filter: blur(10px);
   }
 }
+
+/* 社交链接部分 */
+.VPSocialLink {
+  @apply bg-[#fcfcfd] m-1 rounded-sm border-[0] shadow-[0_2px_4px_rgba(45,35,66,0.2),0_7px_13px_-3px_rgba(45,35,66,0.15)] inset-shadow-[0_-3px_0_#d6d6e7] box-border text-[#36395a] cursor-pointer inline-flex no-underline [transition:box-shadow_0.15s,transform_0.15s]!;
+}
+
+.VPSocialLink:not(.has-sidebar):not(.home.top) {
+  /* background-color: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(10px); */
+  @apply bg-white/0 backdrop-blur-[10px];
+}
+
+.VPSocialLink:focus {
+  box-shadow:
+    #d6d6e7 0 0 0 1.5px inset,
+    rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+    #d6d6e7 0 -3px 0 inset;
+}
+
+.VPSocialLink:hover {
+  box-shadow:
+    rgba(45, 35, 66, 0.3) 0 4px 8px,
+    rgba(45, 35, 66, 0.2) 0 7px 13px -3px,
+    #d6d6e7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.VPSocialLink:active {
+  box-shadow: #d6d6e7 0 3px 7px inset;
+  transform: translateY(2px);
+}

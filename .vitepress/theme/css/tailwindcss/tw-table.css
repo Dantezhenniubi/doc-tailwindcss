@@ -1,30 +1,36 @@
-/* 定义Markdown表格样式 */
-
-.vp-doc {
-  table {
-    @apply border-separate border border-gray-400 table-auto
-      bg-blue-500 transition delay-10 duration-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-green-500;
-  }
-  /* 表头 */
-  table th {
-    @apply bg-green-50 align-middle whitespace-pre drop-shadow-lg;
-  }
-  /* 表格行 */
-  table tr {
-    @apply whitespace-pre;
-  }
-  
+/* ===== Markdown 表格 ===== */
+.vp-doc table {
+  @apply w-full border-separate border-spacing-y-1
+         border border-gray-200 bg-white
+         rounded-lg; /* 圆角容器 */
 }
 
-/* 黑暗模式支持 */
-.dark .vp-doc {
-    table {
-      @apply border-separate border border-gray-400 table-auto
-        bg-blue-500 transition delay-10 duration-100 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-indigo-500;
-    }
-    /* 表头 */
-    table th {
-      @apply bg-indigo-600;
-    }
-    
-  }
+/* 表头：微渐变 */
+
+.vp-doc thead th:not(:where(.vp-raw, .vp-raw *)) {
+  @apply px-4 py-3 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 text-left text-sm font-semibold text-gray-900 border-gray-200;
+}
+
+/* 表格行：仅悬停透明度变化，无位移 */
+.vp-doc tbody tr {
+  @apply border-b border-gray-100; /* 仅颜色过渡 */
+}
+.vp-doc td {
+  @apply px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5
+  transition-colors duration-200 align-middle whitespace-nowrap leading-none;
+}
+.vp-doc td > .icon,
+.vp-doc td > Icon {
+  @apply self-start leading-none; /* ③ 图标不撑高行盒 */
+}
+
+/* 黑暗模式：仅换色，不动画 */
+.dark .vp-doc table {
+  @apply border-gray-700 bg-gray-900;
+}
+.dark .vp-doc th {
+  @apply border-gray-600 text-gray-100;
+}
+.dark .vp-doc td {
+  @apply border-gray-800;
+}

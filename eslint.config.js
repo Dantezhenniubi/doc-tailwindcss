@@ -32,6 +32,7 @@ export default [
     },
     rules: {
       'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+      'vue/no-v-model-argument': 'off',
     },
   },
   // 5. JavaScript 文件配置
@@ -83,6 +84,7 @@ export default [
         },
         parser: {
           // 在 <script> 标签中使用不同的解析器
+          '<template>': tsParser,
           js: 'espree', // 使用 espree 解析器
           ts: tsParser,
         },
@@ -96,6 +98,11 @@ export default [
       'vue/component-api-style': ['error', ['script-setup']], // 强制使用 script setup 语法
       'vue/block-order': ['error', { order: ['template', 'script', 'style'] }], // 强制组件的块顺序
       'vue/no-multiple-template-root': 'off', // 允许template根元素没有子元素
+      // 显式关闭VuePlugin已经弃用的规则
+      'vue/no-v-for-template-key': 'off',
+      'vue/no-v-model-argument': 'off',
+      'vue/valid-model-definition': 'off',
+      'vue/valid-v-bind-sync': 'off',
     },
   },
 
@@ -169,6 +176,7 @@ export default [
       '**/*.md',
       'public/**',
       'assets/**',
+      '**/dist/**',
       // '**/test-lint/**', // 用于测试语法的目录
     ],
   },

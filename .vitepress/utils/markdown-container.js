@@ -2,7 +2,6 @@
 // 将Iconify图标库和markdown-it-container结合
 // 用于创建带有Iconify图标的自定义容器
 import { getContainerConfigs } from './container-config.js';
-
 /**
  * 创建带有Iconify图标的自定义容器
  * @param {Object} options 配置选项
@@ -12,11 +11,7 @@ import { getContainerConfigs } from './container-config.js';
  * @returns {Function} markdown-it插件函数
  */
 export function createIconContainer(options) {
-  const {
-    name,
-    defaultTitle = '',
-    iconPrefix = 'tabler:'
-  } = options;
+  const { name, defaultTitle = '', iconPrefix = 'tabler:' } = options;
 
   return async (md) => {
     // 动态导入markdown-it-container插件
@@ -33,15 +28,13 @@ export function createIconContainer(options) {
 
         if (token.nesting === 1) {
           // 开始标签
-          const match = token.info
-            .trim()
-            .match(new RegExp(`^${name}\\s*(.*)$`));
+          const match = token.info.trim().match(new RegExp(`^${name}\\s*(.*)$`));
           const title = match && match[1] ? match[1] : defaultTitle;
-          const iconName = options.icon ? `${iconPrefix}${options.icon}` : "";
+          const iconName = options.icon ? `${iconPrefix}${options.icon}` : '';
 
           const iconHtml = iconName
-            ? `<span class="container-icon"><iconify-icon icon="${iconName}"></iconify-icon></span>`
-            : "";
+            ? `<span class="container-icon"><Icon icon="${iconName}"></Icon></span>`
+            : '';
 
           return `<div class="custom-block ${name}">
             <p class="custom-block-title">
@@ -51,7 +44,7 @@ export function createIconContainer(options) {
           `;
         } else {
           // 结束标签
-          return "</div>\n";
+          return '</div>\n';
         }
       },
     });
@@ -67,15 +60,15 @@ export function createIconContainers(containers) {
   return async (md) => {
     // 如果没有提供容器配置，则使用默认配置
     const containerConfigs = containers || getContainerConfigs();
-    
+
     for (const [name, config] of Object.entries(containerConfigs)) {
       const containerPlugin = createIconContainer({
         name,
         defaultTitle: config.defaultTitle || '',
         icon: config.icon || '',
-        iconPrefix: config.iconPrefix || 'tabler:'
+        iconPrefix: config.iconPrefix || 'tabler:',
       });
-      
+
       await containerPlugin(md);
     }
   };

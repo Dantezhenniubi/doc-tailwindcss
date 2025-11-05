@@ -1,0 +1,63 @@
+/* 侧边栏区分文件夹和文件的图标 */
+
+/* 侧边栏缩放 */
+.group:has([role='button']) .VPSidebarItem.level-0 .items {
+  padding-left: 15px !important;
+  border-left: 1px solid var(--vp-c-divider);
+  border-radius: 2px;
+  transition: background-color 0.25s;
+}
+
+/* 侧边栏图标 */
+/* 选中所有 .VPSidebarItem 元素，排除带有 .is-link 类的 */
+#VPSidebarNav .VPSidebarItem:not(.is-link).collapsed > .item {
+  display: inline-flex;
+  align-items: center; /* 垂直居中对齐图标和文本 */
+}
+
+/* 为所有不带 .is-link 的 .VPSidebarItem 折叠状态添加图标 */
+#VPSidebarNav .VPSidebarItem:not(.is-link).collapsed > .item::before {
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23ffa000' d='M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v8h40v-4c0-2.2-1.8-4-4-4'/%3E%3Cpath fill='%23ffca28' d='M40 12H8c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4'/%3E%3C/svg%3E"); /* 设置图标路径 */
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle; /* 确保图标与文本垂直居中 */
+  background-size: cover;
+  margin-right: 4px; /* 给图标和文本之间增加间距 */
+}
+
+#VPSidebarNav .VPSidebarItem:not(.is-link) > .item {
+  display: inline-flex;
+  align-items: center; /* 垂直居中对齐图标和文本 */
+}
+
+/* 为所有不带 .is-link 的 .VPSidebarItem 非折叠状态添加图标 */
+#VPSidebarNav .VPSidebarItem:not(.is-link) > .item::before {
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23ffa000' d='M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v8h40v-4c0-2.2-1.8-4-4-4'/%3E%3Cpath fill='%23ffca28' d='M40 12H8c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4'/%3E%3C/svg%3E"); /* 设置图标路径 */
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle; /* 确保图标与文本垂直居中 */
+  background-size: cover;
+  margin-right: 4px; /* 给图标和文本之间增加间距 */
+}
+
+/* 选中带有 .is-link 的 .VPSidebarItem 的直接子元素 .item */
+#VPSidebarNav .VPSidebarItem.is-link > .item {
+  display: inline-flex;
+  align-items: center; /* 垂直居中图标和文字 */
+}
+
+/* 为选中的 .item 添加图标 */
+#VPSidebarNav .VPSidebarItem.is-link > .item::before {
+  content: '';
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23d0d1d2' d='M57.792 58.54c0 3.02-2.697 5.46-6.03 5.46H13.29c-3.33 0-6.03-2.441-6.03-5.46V9.31c0-3.01 2.703-5.462 6.03-5.462h38.472c3.335 0 6.03 2.448 6.03 5.462z'/%3E%3Cpath fill='%23e7e6e6' d='M57.792 54.688c0 3.02-2.697 5.463-6.03 5.463H13.29c-3.33 0-6.03-2.445-6.03-5.463V5.458c0-3.01 2.703-5.459 6.03-5.459h38.472c3.335 0 6.03 2.446 6.03 5.459z'/%3E%3Cpath fill='%2335494d' d='M14.863 13.232h34.23c2.301 0 2.301-3.228 0-3.228h-34.23c-2.298 0-2.298 3.228 0 3.228m0 6.551h34.23c2.301 0 2.301-3.224 0-3.224h-34.23c-2.298 0-2.298 3.224 0 3.224m0 6.699h34.23c2.301 0 2.301-3.224 0-3.224h-34.23c-2.298 0-2.298 3.224 0 3.224m0 6.548h34.23c2.301 0 2.301-3.227 0-3.227h-34.23c-2.298 0-2.298 3.227 0 3.227m0 23.697h15.75c2.301 0 2.301-3.229 0-3.229h-15.75c-2.298 0-2.298 3.229 0 3.229'/%3E%3C/svg%3E"); /* 图标路径 */
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: cover;
+  margin-right: 4px; /* 图标与文字间距 */
+}

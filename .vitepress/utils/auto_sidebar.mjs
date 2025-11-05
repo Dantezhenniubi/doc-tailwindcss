@@ -6,7 +6,7 @@ import fs from 'node:fs';
 // 文件根目录
 const DIR_PATH = path.resolve();
 // 白名单，过滤不是文章的文件和文件夹
-const WHITE_LIST = ['index.md', '.vitepress', 'node_modules', '.idea', 'assets'];
+const WHITE_LIST = ['index.md', '.vitepress', 'node_modules', '.idea', 'assets', 'dist'];
 
 // 最大递归深度限制，防止栈溢出
 const MAX_RECURSION_DEPTH = 10;

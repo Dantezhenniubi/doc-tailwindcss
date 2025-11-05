@@ -6,6 +6,8 @@ outline: [2,6]
 # 集成Roo Code使用大模型
 这里介绍一下怎么使用VSCode插件`Roo Code`来使用免费大模型，当然你有米用付费我也没意见（
 
+2025.10.27——沙比Trae编辑器天天报错，换回VScode了，这里尝试使用新拓展：Cline 来部署模型
+
 ## 安装Roo Code
 这里选择一个类VSCode的编辑器，不论是VSCode本体或者是衍生的AI编辑器如字节的Trae都可以~<br>
 当然本教程使用的是Trae<br>

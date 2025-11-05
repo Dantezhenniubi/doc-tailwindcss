@@ -35,3 +35,19 @@
 然后填入你用于存储图片的仓库名称，必须按照`用户名/仓库名`格式来，分支随意，默认即可。
 ![](https://raw.githubusercontent.com/Dantezhenniubi/image-repo/master/GitHub%E5%9B%BE%E5%BA%8A-%E9%85%8D%E7%BD%AEPicGo1.jpg)
 点击设为默认图床即可，我们就可以在上传区开始上传图片了，很简单。
+
+## 使用代理服务加速访问
+
+我们可以使用免费代理服务来加速图片访问，将你上传到GitHub的图片地址替换为代理服务的地址。
+
+这里我们使用[JSDELIVR](https://www.jsdelivr.com/github)来加速访问。
+
+例如，你上传到GitHub的图片地址为：
+```md
+![](https://raw.githubusercontent.com/Dantezhenniubi/image-repo/master/%E9%AB%98%E5%BA%A6%E8%BF%87%E6%B8%A1%E5%8E%9F%E7%90%86.png)
+```
+你可以将其替换为：
+```md
+![](https://cdn.jsdelivr.net/gh/Dantezhenniubi/image-repo@master/%E9%AB%98%E5%BA%A6%E8%BF%87%E6%B8%A1%E5%8E%9F%E7%90%86.png)
+```
+即可加速访问。

@@ -92,10 +92,10 @@ export default defineConfig({
     },
 
     // 自定义Markdown实例配置
-    config: (md) => {
-      // 这里可以添加自定义的markdown-it插件
-      // 例如：md.use(require('markdown-it-plugin-name'))
-    },
+    // config: (md) => {
+    // 这里可以添加自定义的markdown-it插件
+    // 例如：md.use(require('markdown-it-plugin-name'))
+    // },
   },
 
   // 站点级别钩子

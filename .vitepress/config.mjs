@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import { fileURLToPath, URL } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
 
 // 两个按需引入的插件
@@ -21,6 +22,12 @@ import path from 'path';
 import { createIconContainers } from './utils/markdown-container.js';
 // 导入markdown容器样式生成器
 import { writeContainerStyles } from './utils/container-style-generator.js';
+// timeline时间线样式
+import timeline from 'vitepress-markdown-timeline';
+// 代码演示块
+import { applyPlugins } from '@ruabick/md-demo-plugins';
+// mermaid支持
+import { MermaidMarkdown, MermaidPlugin } from 'vitepress-plugin-mermaid';
 
 const fileAndStyles = {};
 
@@ -63,6 +70,15 @@ export default defineConfig({
 
   // vite 配置
   vite: {
+    // 替换默认组件
+    resolve: {
+      alias: [
+        {
+          find: /^.*\/VPSwitchAppearance\.vue$/,
+          replacement: fileURLToPath(new URL('./theme/components/DarkSwitch.vue', import.meta.url)),
+        },
+      ],
+    },
     // vite 构建配置
     build: {
       rollupOptions: {
@@ -78,7 +94,7 @@ export default defineConfig({
       AutoImport({
         imports: ['vue', '@vueuse/core'], // 自动导入 Vue 相关函数
         resolvers: [ElementPlusResolver()], // 自动导入 Element Plus 组件
-        // dts: '.vitepress/auto-imports.d.ts',  // 生成自动导入的声明文件，默认生成auto-imports.d.ts
+        dts: true, // 生成自动导入的声明文件，当检测到TS支持默认就是生成'./auto-imports.d.ts'
       }),
       // `按需导入`插件配置
       Components({
@@ -115,11 +131,17 @@ export default defineConfig({
         // 指令自动导入 (Vue 3 默认开启)
         directives: true,
       }),
+      // mermaid支持
+      MermaidPlugin(),
     ],
+    optimizeDeps: {
+      // mermaid支持
+      include: ['mermaid'],
+    },
     // vite SSR配置
     ssr: {
       // 解决 Element Plus、Naive-ui CSS 在 SSR 中的问题
-      noExternal: ['element-plus', 'naive-ui', 'date-fns', 'vueuc'],
+      noExternal: ['element-plus', 'naive-ui', 'date-fns', 'vueuc', 'mermaid'],
     },
   },
   // naive-ui额外配置
@@ -166,13 +188,18 @@ export default defineConfig({
       lazyLoading: true,
     },
     // 插件
-    config(md) {
+    config: (md) => {
+      applyPlugins(md);
       // 配置带有Iconify图标的容器
       createIconContainers()(md);
       const customCssPath = path.resolve(__dirname, 'theme/css/md-container.css');
       writeContainerStyles(customCssPath, async (filePath, content) => {
         await fs.writeFile(filePath, content, 'utf-8');
       });
+      // 时间线样式
+      md.use(timeline);
+      // mermaid支持
+      md.use(MermaidMarkdown);
     },
   },
   themeConfig: {
@@ -199,14 +226,9 @@ export default defineConfig({
 
     // 导航栏最多支持两层嵌套，请注意不要在第二层items使用生成函数
     nav: [
-      { text: 'Home', link: '/' },
-      { text: '博客', link: '/blog' },
-      { text: '主页', link: '/homepage' },
-      // 原本的结构：
-      // {
-      //   text: "后端相关",
-      //   items: set_nav_v2("/Back-end"),
-      // },
+      { text: 'Home', link: '/' }, // TODO:首页
+      { text: '博客', link: '/blog' }, // TODO:通用文章页
+      { text: '主页', link: '/NetNavPage' }, // 网站导航页
       set_nav_smart('开发工具', '/docs/开发工具/'),
       set_nav_smart('个人记录', '/docs/DailyRecord/'),
       set_nav_smart('前端相关', '/docs/Front-end'),
@@ -225,9 +247,9 @@ export default defineConfig({
     // 路径加index作为结尾，意味着只有该目录下的首页才有侧边栏，如果没有，则该目录下所有页面都会显示侧边栏
     sidebar: {
       '/docs/DailyRecord/index': [
-        set_sidebar_smart('踩坑记录', '/docs/DailyRecord/踩坑记录/'),
         set_sidebar_smart('开发记录', '/docs/DailyRecord/开发记录/'),
         set_sidebar_smart('实习记录', '/docs/DailyRecord/实习记录/'),
+        set_sidebar_smart('踩坑记录', '/docs/DailyRecord/踩坑记录/'),
       ],
       '/docs/others/写文章相关/vitepress功能/': [
         set_sidebar_smart('拓展语法', '/docs/others/写文章相关/vitepress功能/拓展语法/'),
@@ -246,6 +268,7 @@ export default defineConfig({
       '/docs/Front-end/TailwindCSS/': [
         set_sidebar_smart('TailwindCSS', '/docs/Front-end/TailwindCSS/'),
       ],
+      '/docs/Front-end/Vue3/': [set_sidebar_smart('Vue3', '/docs/Front-end/Vue3/')],
     },
     // sidebar: false, // 关闭侧边栏
     // aside: "left", // 设置右侧大纲左侧显示，建议页面单独配置，用于想展示较大内容占比的情况
@@ -256,16 +279,12 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/Dantezhenniubi' },
       // B站
       {
-        icon: {
-          svg: '<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><g fill="#eb1010" fill-rule="evenodd"><path d="M310.134 596.45c-7.999-4.463-16.498-8.43-24.997-11.9a274 274 0 0 0-26.996-7.438c-2.5-.992-2.5.991-2.5 1.487c0 7.934.5 18.843 1.5 27.768c1 7.438 2 15.372 4 22.81c0 .496 0 .991.5 1.487c.999.992 1.999 1.488 2.999.496c7.999-4.463 15.998-8.43 22.997-13.388c7.499-5.454 15.498-11.9 21.997-18.347c1.5-1.487 0-2.479.5-2.975m323.96-11.9a274 274 0 0 0-26.997-7.438c-2.5-.992-2.5.991-2.5 1.487c0 7.934.5 18.843 1.5 27.768c1 7.438 2 15.372 4 22.81c0 .496 0 .991.5 1.487c1 .992 2 1.488 3 .496c7.999-4.463 15.998-8.43 22.997-13.388c7.499-5.454 15.498-11.9 21.997-18.347c2-1.487.5-2.479.5-2.975c-7.5-4.463-16.498-8.43-24.997-11.9"/><path d="M741.496 112H283c-94.501 0-171 76.5-171 171.5v458c.5 94 77 170.5 170.999 170.5h457.997c94.5 0 171.002-76.5 171.002-170.5v-458c.497-95-76.002-171.5-170.502-171.5m95 343.5h15.5v48h-15.5zm-95.5-1.5l2 43l-13.5 1.5l-5-44.5zm-23.5 0l4 45.5l-14.5 1.5l-6.5-47.5h17zm-230.498 1.5h15v48h-15zm-96-1.5l2 43l-13.5 1.5l-5-44.5zm-23.5 0l4 45.5l-14.5 2l-6-47.5zm-3.5 149C343.498 668.5 216 662.5 204.5 660.5C195.5 499 181.5 464 170 385l54.5-22.5c1 71.5 9 185 9 185s108.5-15.5 132 47c.5 3 0 6-1.5 8.5m20.5 35.5l-23.5-124h35.5l13 123zm44.5-8l-27-235l33.5-1.5l21 236H429zm34-175h17.5v48H467zm41 190h-26.5l-9.5-126h36zm209.998-43C693.496 668 565.997 662 554.497 660c-9-161-23-196-34.5-275l54.5-22.5c1 71.5 9 185 9 185s108.5-15.5 132 46.5c.5 3 0 6-1.5 8.5m19.5 36l-23-124h35.5l13 123zm45.5-8l-27.5-235l33.5-1.5l21 236h-27zm33.5-175h17.5v48h-13zm41 190h-26.5l-9.5-126h36z"/></g></svg>',
-        },
+        icon: 'bilibili',
         link: 'https://space.bilibili.com/16735280',
       },
       // Gitee
       {
-        icon: {
-          svg: '<svg t="1746354920188" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4453" width="200" height="200"><path d="M512 1024C229.2224 1024 0 794.7776 0 512S229.2224 0 512 0s512 229.2224 512 512-229.2224 512-512 512z m259.1488-568.8832H480.4096a25.2928 25.2928 0 0 0-25.2928 25.2928l-0.0256 63.2064c0 13.952 11.3152 25.2928 25.2672 25.2928h177.024c13.9776 0 25.2928 11.3152 25.2928 25.2672v12.6464a75.8528 75.8528 0 0 1-75.8528 75.8528H366.592a25.2928 25.2928 0 0 1-25.2672-25.2928v-240.1792a75.8528 75.8528 0 0 1 75.8272-75.8528h353.9456a25.2928 25.2928 0 0 0 25.2672-25.2928l0.0768-63.2064a25.2928 25.2928 0 0 0-25.2672-25.2928H417.152a189.6192 189.6192 0 0 0-189.6192 189.6448v353.9456c0 13.9776 11.3152 25.2928 25.2928 25.2928h372.9408a170.6496 170.6496 0 0 0 170.6496-170.6496v-145.408a25.2928 25.2928 0 0 0-25.2928-25.2672z" fill="#C71D23" p-id="4454"></path></svg>',
-        },
+        icon: 'gitee',
         link: 'https://gitee.com/dantezhenniubi',
       },
       // 牛客网

@@ -9,7 +9,6 @@
       </div>
     </a>
   </div>
-  <MyComponent />
 </template>
 
 <script setup lang="ts">

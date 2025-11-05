@@ -1,0 +1,30 @@
+/* 复制反馈效果 */
+.copy-feedback {
+  animation: copyFlash 0.5s ease;
+  position: relative;
+}
+
+.copy-feedback::after {
+  content: '✓ 已复制';
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 0.7em;
+  color: #10b981;
+  font-weight: bold;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+@keyframes copyFlash {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(99, 102, 241, 0.1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}

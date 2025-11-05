@@ -1,4 +1,8 @@
 <!-- 使用@vueuse/motion实现的文章瀑布流动画组件（SSR兼容版） -->
+<!-- eslint-disable vue/valid-template-root -->
+
+<template></template>
+
 <script setup>
 import { useMotion } from '@vueuse/motion';
 import { onMounted, onUnmounted, ref, watch, nextTick } from 'vue';

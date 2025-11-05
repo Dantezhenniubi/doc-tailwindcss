@@ -1,0 +1,82 @@
+/* 高亮行：渐变 + 发光 + 背景 + Hover 放大 */
+
+div[class*='language-'] .highlighted {
+  position: relative;
+  filter: none !important;
+  /* 文字渐变动画 */
+  @apply bg-clip-text text-transparent;
+  -webkit-background-clip: text !important;
+  background-image: linear-gradient(
+    25deg,
+    #4059ad 0%,
+    #6b9ac4 25%,
+    #97d8c4 50%,
+    #41463d 75%,
+    #d90368 100%
+  );
+  background-size: 200% 100%;
+  animation: shine 5s linear infinite;
+  text-shadow:
+    0 0 8px rgba(151, 216, 196, 0.6),
+    /* 主色 #97D8C4 的发光 */ 0 0 16px rgba(107, 154, 196, 0.4),
+    /* #6B9AC4 的外层光 */ 0 0 24px rgba(64, 89, 173, 0.3); /* #4059AD 的远光 */
+  /* ✨ Hover 放大准备 */
+  display: inline-block; /* 必须：transform 对 inline 元素无效 */
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: left center; /* 从左侧放大，更自然 */
+}
+/* 🔍 Hover 放大效果 */
+div[class*='language-'] .highlighted:hover {
+  transform: scale(1.025); /* 放大 2.5% */
+  z-index: 1; /* 确保放大后在其他行之上 */
+}
+
+/* 暗色模式适配 */
+html.dark div[class*='language-'] .highlighted {
+  background-image: linear-gradient(
+    25deg,
+    #d89844 0%,
+    #720e07 25%,
+    #45050c 50%,
+    #37423d 75%,
+    #0b3c49 100%
+  );
+  text-shadow:
+    0 0 8px rgba(216, 152, 68, 0.7),
+    /* #D89844 */ 0 0 16px rgba(255, 200, 100, 0.5),
+    /* 暖黄增强 */ 0 0 24px rgba(255, 255, 255, 0.3); /* 白光泛边 */
+}
+
+/* 灰色背景垫底（通过伪元素） */
+div[class*='language-'] .highlighted::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(65, 70, 61, 0.08); /* 可调整透明度 */
+  z-index: -1;
+}
+html.dark div[class*='language-'] .highlighted::before {
+  background-color: rgba(55, 66, 61, 0.12); /* #37423D */
+}
+
+/* 非高亮行模糊 */
+div[class*='language-']:has(.highlighted) .line:not(.highlighted) {
+  filter: blur(1.2px);
+  opacity: 0.85;
+}
+
+div[class*='language-']:hover :has(.highlighted) .line:not(.highlighted) {
+  filter: blur(0.5px);
+}
+
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}

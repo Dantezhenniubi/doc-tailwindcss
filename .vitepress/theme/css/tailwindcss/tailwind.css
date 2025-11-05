@@ -8,6 +8,9 @@
 @import './tw-table.css';
 @import './tw-md-container.css';
 @import './tw-VPNavBar.css';
+@import './tw-strong.css';
+@import './tw-code-highlighted.css';
+@import './theme.css';
 
 @plugin "@iconify/tailwind4" {
   prefix: 'iconify';

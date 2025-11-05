@@ -17,8 +17,8 @@ function extractRoutePath(path) {
 
   // 备选方案：移除不必要的路径前缀
   return path
-    .replace(/^.*?\/docs\//, "/") // 移除 /docs/ 之前的所有部分
-    .replace(/(\.md|\.html)$/, ""); // 移除扩展名
+    .replace(/^.*?\/docs\//, '/') // 移除 /docs/ 之前的所有部分
+    .replace(/(\.md|\.html)$/, ''); // 移除扩展名
 }
 
 /**
@@ -28,9 +28,9 @@ function extractRoutePath(path) {
  */
 function formatDisplayName(name) {
   return name
-    .replace(/-/g, " ")
+    .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase())
-    .replace(/\.md$/, "");
+    .replace(/\.md$/, '');
 }
 
 /**
@@ -42,10 +42,10 @@ function formatDisplayName(name) {
  * @param {Function} options.customMap - 自定义映射函数
  * @returns {Promise<Array>} - 返回处理后的文件列表
  */
-export function getMarkdownFiles(MapName = ".", options = {}) {
+export function getMarkdownFiles(MapName = '.', options = {}) {
   // 默认选项
   const defaultOptions = {
-    exclude: ["index.md"],
+    exclude: ['index.md'],
     customFilter: null,
     customMap: null,
   };
@@ -55,11 +55,9 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
 
   // 定义硬编码的路径映射
   const mdFilesMap = {
-    ".": import.meta.glob("../../*.md"),
-    前端开发小技巧: import.meta.glob(
-      "../../docs/Front-end/前端开发小技巧/*.md"
-    ),
-    前端工程化: import.meta.glob("../../docs/Front-end/前端工程化/*.md"),
+    '.': import.meta.glob('../../*.md'),
+    前端开发小技巧: import.meta.glob('../../docs/Front-end/前端开发小技巧/*.md'),
+    前端工程化: import.meta.glob('../../docs/Front-end/前端工程化/*.md'),
 
     // 可以根据需要添加更多的预定义路径
   };
@@ -72,18 +70,16 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
   const fileList = Object.keys(mdFiles)
     // 应用默认过滤 - 排除指定文件
     .filter((path) => {
-      const fileName = path.split("/").pop();
+      const fileName = path.split('/').pop();
       return !mergedOptions.exclude.includes(fileName);
     })
     // 应用自定义过滤（如果有）
-    .filter((path) =>
-      mergedOptions.customFilter ? mergedOptions.customFilter(path) : true
-    )
+    .filter((path) => (mergedOptions.customFilter ? mergedOptions.customFilter(path) : true))
     // 应用默认映射 - 提取文件名和构建路由
     .map((path) => {
       // 提取文件名（不含路径和扩展名）
-      const fileNameWithExt = path.split("/").pop();
-      const name = fileNameWithExt.replace(/\.md$/, "");
+      const fileNameWithExt = path.split('/').pop();
+      const name = fileNameWithExt.replace(/\.md$/, '');
       // 构建路由路径
 
       const route = extractRoutePath(path);
@@ -105,7 +101,7 @@ export function getMarkdownFiles(MapName = ".", options = {}) {
  * @param {string} MapName - 映射路径的别名，默认为当前目录 '.'
  * @param {Object} options - 配置选项，同getMarkdownFiles的options
  */
-export function useMarkdownFiles(articlesRef, MapName = ".", options = {}) {
+export function useMarkdownFiles(articlesRef, MapName = '.', options = {}) {
   // 获取文件列表
 
   const fileList = getMarkdownFiles(MapName, options);

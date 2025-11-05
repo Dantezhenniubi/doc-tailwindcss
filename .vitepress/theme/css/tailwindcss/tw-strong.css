@@ -1,0 +1,62 @@
+/* 自定义strong部分的文字样式 */
+/* 目前是荧光笔描绘的动画效果，依赖组件脚本操作元素进入视口时动态添加类名 */
+
+/* 亮色模式 */
+strong {
+  @apply relative;
+}
+
+strong::after {
+  content: '';
+  @apply absolute inset-0 rounded-[5px] z-[-1];
+  /* 亮色模式：清新青绿 */
+  background-image:
+    linear-gradient(
+      104deg,
+      rgba(130, 255, 173, 0) 0.9%,
+      rgba(130, 255, 173, 1) 2.4%,
+      rgba(130, 255, 173, 0.5) 5.8%,
+      rgba(130, 255, 173, 0.1) 93%,
+      rgba(130, 255, 173, 0.7) 96%,
+      rgba(130, 255, 173, 0) 98%
+    ),
+    linear-gradient(
+      183deg,
+      rgba(130, 255, 173, 0) 0%,
+      rgba(130, 255, 173, 0.3) 7.9%,
+      rgba(130, 255, 173, 0) 15%
+    );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.01s;
+}
+
+/* 暗色模式覆盖 */
+html.dark strong::after {
+  background-image:
+    linear-gradient(
+      104deg,
+      rgba(255, 213, 128, 0) 0.9%,
+      /* 透明 */ rgba(255, 213, 128, 0.9) 2.4%,
+      /* 主色：暖黄 */ rgba(255, 213, 128, 0.5) 5.8%,
+      rgba(255, 213, 128, 0.1) 93%,
+      rgba(255, 213, 128, 0.6) 96%,
+      rgba(255, 213, 128, 0) 98%
+    ),
+    linear-gradient(
+      183deg,
+      rgba(255, 213, 128, 0) 0%,
+      rgba(255, 213, 128, 0.25) 7.9%,
+      rgba(255, 213, 128, 0) 15%
+    );
+}
+
+strong.highlighted::after {
+  animation: highlight 1.5s ease-in-out forwards;
+}
+
+@keyframes highlight {
+  to {
+    transform: scaleX(1);
+  }
+}

@@ -1,5 +1,5 @@
 // container-config.js
-// 容器配置文件，用于集中管理所有自定义容器的配置
+// markdown-it-container容器配置文件，用于集中管理所有自定义容器的配置
 
 /**
  * 容器配置对象
