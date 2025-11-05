@@ -39,7 +39,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.18.2 # 指定与本地相同的Node.js版本
+          node-version: 20.19.5 # 指定与本地相同的Node.js版本
           cache: pnpm # 使用pnpm缓存
       - name: Setup Pages
         uses: actions/configure-pages@v4 # 在工作流程自动配置GithubPages
